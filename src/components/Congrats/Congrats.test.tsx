@@ -12,7 +12,7 @@ Enzyme.configure({ adapter: new EnzymeAdapter() });
  * @param {object} props Component props specific to this setup.
  * @returns {ShallowWrapper}
  */
-const setup = (props = {}) => {
+const setup = (props={}) => {
   return shallow(<Congrats {...props} />)
 }
 

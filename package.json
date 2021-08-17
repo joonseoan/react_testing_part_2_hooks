@@ -10,6 +10,7 @@
     "@types/node": "^12.20.19",
     "@types/react": "^17.0.17",
     "@types/react-dom": "^17.0.9",
+    "prop-types": "^15.7.2",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-scripts": "4.0.3",
@@ -43,6 +44,7 @@
   "devDependencies": {
     "@types/enzyme": "^3.10.9",
     "@wojtekmaj/enzyme-adapter-react-17": "^0.6.3",
+    "check-prop-types": "^1.1.2",
     "enzyme": "^3.11.0"
   }
 }
