@@ -1,7 +1,8 @@
-import Enzyme, { shallow, ShallowWrapper } from 'enzyme';
+import Enzyme, { shallow } from 'enzyme';
 import EnzymeAdapter from '@wojtekmaj/enzyme-adapter-react-17';
+import checkPropTypes  from 'check-prop-types';
 
-import { findByTestAttr } from '../../../test/testUtil';
+import { findByTestAttr } from '../../test/testUtil';
 import Congrats from './Congrats';
 
 Enzyme.configure({ adapter: new EnzymeAdapter() });
@@ -32,4 +33,12 @@ test('renders non-empty congrats message when `success` prop os true', () => {
   const wrapper = setup({ success: true });
   const message = findByTestAttr(wrapper, 'congrats-message');
   expect(message.text().length).not.toBe(0);
+})
+
+test('it does not throw warning with expected props', () => {
+  const expectedProps = { success: false };
+  // because in Congrats Component, PropTypes are not defined yet ()
+  const propError = checkPropTypes(Congrats.propTypes, expectedProps, 'prop', Congrats.name);
+  // console.log('propError: ', propError); // ---> undefined.
+  expect(propError).toBeUndefined();
 })

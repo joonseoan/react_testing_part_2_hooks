@@ -1,3 +1,5 @@
 1. test prop types
+  // For implementing
   . npm install --save prop-types
-  . npm install --save-dev check-prop-types
+  // For Testing
+  . npm install --save-dev check-prop-types 
