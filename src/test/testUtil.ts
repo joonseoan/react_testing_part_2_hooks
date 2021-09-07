@@ -1,6 +1,6 @@
 import { ShallowWrapper } from "enzyme";
 import checkPropTypes from 'check-prop-types';
-import { FC, ReactChild } from "react";
+import { FC } from "react";
 
 /**
  * Return nodes with the given data-test attribute.
@@ -14,5 +14,7 @@ export const findByTestAttr = (wrapper: ShallowWrapper, val: string) => {
 
 export const checkProps = (component: FC, conformingProps: any) => {
   const propError = checkPropTypes(component.propTypes, conformingProps, 'prop', component.name);
+
+  expect(propError).toBeUndefined();
 }
 

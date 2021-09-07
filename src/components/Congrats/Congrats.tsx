@@ -22,4 +22,10 @@ const Congrats: FC<{ success?: boolean }> = ({ success }) => {
   }
 }
 
+Congrats.propTypes = {
+  // [Important!!!]
+  // 'isRequired' should be here if it wants to get warning!
+  success: PropTypes.bool.isRequired,
+}
+
 export default Congrats;
