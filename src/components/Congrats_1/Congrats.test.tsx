@@ -1,12 +1,18 @@
-import Enzyme, { shallow } from 'enzyme';
-import EnzymeAdapter from '@wojtekmaj/enzyme-adapter-react-17';
+import { shallow } from 'enzyme';
+
+// since the centralized config
+// import Enzyme, { shallow } from 'enzyme';
+// import EnzymeAdapter from '@wojtekmaj/enzyme-adapter-react-17';
+
+// since the testUtil implements
 // testing for props when we are not using typescript.
 import checkPropTypes  from 'check-prop-types';
 
 import { findByTestAttr, checkProps } from '../../test/testUtil';
 import Congrats from './Congrats';
 
-Enzyme.configure({ adapter: new EnzymeAdapter() });
+// since centralized config
+// Enzyme.configure({ adapter: new EnzymeAdapter() });
 
 const defaultProps = {
   success: false,
