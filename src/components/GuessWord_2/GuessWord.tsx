@@ -1,14 +1,24 @@
 import { FC } from 'react';
 import PropTypes from 'prop-types';
 
-const GuessWords: FC = (props) => {
+interface GuessedWordsProps {
+  guessedWords: { guessedWord: String, letterMatchCount: Number } [];
+}
+
+// any: just for testing. (In reality, typescript should not use propTypes.)
+const GuessedWords: FC<GuessedWordsProps | any> = (props) => {
   return (
     <div />
   );
 }
 
-GuessWords.prototype = {
-
+GuessedWords.propTypes = {
+  guessedWords: PropTypes.arrayOf(
+    PropTypes.shape({
+      guessedWord: PropTypes.string.isRequired,
+      letterMatchCount: PropTypes.number.isRequired,
+    })
+  ).isRequired,
 };
 
-export default GuessWords;
+export default GuessedWords;
