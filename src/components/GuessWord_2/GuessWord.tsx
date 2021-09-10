@@ -7,8 +7,22 @@ interface GuessedWordsProps {
 
 // any: just for testing. (In reality, typescript should not use propTypes.)
 const GuessedWords: FC<GuessedWordsProps | any> = (props) => {
+  let contents: JSX.Element;
+
+  if (props.guessedWords.length === 0) {
+    contents = (
+      <span data-test="guess-instructions">
+        Try to guess the correct word!
+      </span>
+    )
+  } else {
+    contents = <div />;
+  }
+  
   return (
-    <div />
+    <div data-test="component-guess-word">
+      { contents }
+    </div>
   );
 }
 
