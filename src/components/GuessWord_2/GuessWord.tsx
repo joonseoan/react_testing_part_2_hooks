@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, Key } from 'react';
 import PropTypes from 'prop-types';
 
 interface GuessedWord {
@@ -11,29 +11,23 @@ interface GuessedWordsProps {
 }
 
 // any: just for testing. (In reality, typescript should not use propTypes.)
-const GuessedWords: FC<GuessedWordsProps | any> = (props) => {
+const GuessedWords: FC<GuessedWordsProps | any> = ({ guessedWords = [] }) => {
   let contents: JSX.Element;
 
-
-  if (props && props.guessedWords) {
-    if (props.guessedWords.length === 0) {
+    if (!guessedWords.length) {
       contents = (
         <span data-test="guess-instructions">
           Try to guess the correct word!
         </span>
       )
     } else {
-      const guessedWordsRows = props.guessedWords.map((word: GuessedWord , index: React.Key) => {
-        if (index) {
-          return (
-            <tr data-test="guessed-word" key={index}>
-              <td>{word.guessedWord}</td>
-              <td>{word.letterMatchCount}</td>
-            </tr>
-          );
-        } else {
-          return null;
-        }
+      const guessedWordsRows = guessedWords.map((word: GuessedWord , index: Key) => {
+        return (
+          <tr data-test="guessed-word" key={index}>
+            <td>{word.guessedWord}</td>
+            <td>{word.letterMatchCount}</td>
+          </tr>
+        );
       });
   
       contents = (
@@ -52,9 +46,6 @@ const GuessedWords: FC<GuessedWordsProps | any> = (props) => {
         </div>
       )
     }
-  } else {
-    contents = <div />;
-  }
   
   return (
     <div data-test="component-guess-word">

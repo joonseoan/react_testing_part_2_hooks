@@ -14,7 +14,7 @@ const defaultProps = {
  * @param {Object} props Component props specific to this setup. 
  * @returns {ShallowWrapper}
  */
-const setup = (props={}) => {
+const setup = (props = {}) => {
   const setupProps = { ...defaultProps, ...props };
   return shallow(<GuessedWords {...setupProps} />)
 }
@@ -33,7 +33,6 @@ describe('if there are not words guessed', () => {
 
 
   test('renders without error', () => {
-    // const wrapper = setup({ guessedWords: {} });
     const component = findByTestAttr(wrapper, 'component-guess-word');
     expect(component.length).toBe(1);
   });
@@ -47,6 +46,7 @@ describe('if there are not words guessed', () => {
 describe('if there are words guessed', () => {
 
   let wrapper: ShallowWrapper;
+
   const guessedWords =[
     { guessedWord: 'train', letterMatchCount: 3 },
     { guessedWord: 'agile', letterMatchCount: 1 },
