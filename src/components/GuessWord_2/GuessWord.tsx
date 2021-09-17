@@ -7,7 +7,7 @@ interface GuessedWord {
 }
 
 interface GuessedWordsProps {
-  guessedWords: GuessedWord [];
+  guessedWords?: GuessedWord [];
 }
 
 // any: just for testing. (In reality, typescript should not use propTypes.)
