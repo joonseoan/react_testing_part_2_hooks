@@ -1,5 +1,5 @@
-import { FC } from 'react';
-import PropTypes from 'prop-types';
+import { FC } from "react";
+import PropTypes from "prop-types";
 
 /**
  * Congrats message page.
@@ -14,18 +14,16 @@ const Congrats: FC<{ success?: boolean }> = ({ success }) => {
           Congratulations! You guessed the word!
         </span>
       </div>
-    )
-  } else {
-    return (
-      <div data-test="component-congrats" />
     );
+  } else {
+    return <div data-test="component-congrats" />;
   }
-}
+};
 
 Congrats.propTypes = {
   // [Important!!!]
   // 'isRequired' should be here if it wants to get warning!
   success: PropTypes.bool.isRequired,
-}
+};
 
 export default Congrats;
