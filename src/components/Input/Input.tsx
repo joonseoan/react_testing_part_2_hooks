@@ -8,10 +8,12 @@ export interface InputProps {
 
 // React.FC (no destruction) : for now to test
 const Input: React.FC<InputProps> = ({ secretWord }) => {
-  // Muse use React.useState without destructuring.
+  // Must use React.useState without destructuring.
   const [currentGuess, setCurrentGuess] = React.useState<string>("");
 
-  const [currentGuess_des, setCurrentGuess_des] = React.useState<string>("");
+  // Destructuring case
+  // const { useState } = React;
+  // const [currentGuess_des, setCurrentGuess_des] = useState<string>("");
 
   return (
     <div data-test="component-input">
@@ -22,9 +24,13 @@ const Input: React.FC<InputProps> = ({ secretWord }) => {
           type="text"
           placeholder="enter guess"
           value={currentGuess}
+          // Destructuring case
+          // value={currentGuess_des}
           onChange={(event) => {
             setCurrentGuess(event.target.value);
-            setCurrentGuess_des(event.target.value);
+
+            // Destructuring case
+            // setCurrentGuess_des(event.target.value);
           }}
         />
         <button data-test="submit-button" className="btn btn-primary mb-2">
