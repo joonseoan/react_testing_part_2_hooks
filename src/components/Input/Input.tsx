@@ -1,4 +1,4 @@
-import React from "react";
+import React, { FormEvent } from "react";
 import PropTypes from "prop-types";
 
 // ?: for now testing with propType.
@@ -15,9 +15,14 @@ const Input: React.FC<InputProps> = ({ secretWord }) => {
   // const { useState } = React;
   // const [currentGuess_des, setCurrentGuess_des] = useState<string>("");
 
+  const handleOnSubmit = (event: FormEvent) => {
+    event.preventDefault();
+    setCurrentGuess("");
+  };
+
   return (
     <div data-test="component-input">
-      <form className="form-inline">
+      <form className="form-inline" onSubmit={handleOnSubmit}>
         <input
           data-test="input-box"
           className="mb-2 mx-sm-3"

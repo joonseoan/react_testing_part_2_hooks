@@ -1,5 +1,5 @@
 import React from "react";
-import { shallow } from "enzyme";
+import { shallow, ShallowWrapper } from "enzyme";
 
 import { findByTestAttr, checkProps } from "../../test/testUtil";
 import Input from "./Input";
@@ -31,13 +31,24 @@ test("does not throw warning with expected props", () => {
 });
 
 describe("state controlled input field", () => {
+  let wrapper: ShallowWrapper;
+
+  const mockSetCurrentGuess = jest.fn();
+
+  beforeEach(() => {
+    jest.clearAllMocks();
+
+    React.useState = jest.fn(() => ["", mockSetCurrentGuess]);
+    wrapper = setup();
+  });
+
   // Without destructuring
   test("state updates with value of input box upon change", () => {
     // it is the second element, setCurrentWord.
-    const mockSetCurrentGuess = jest.fn();
-    React.useState = jest.fn(() => ["", mockSetCurrentGuess]);
+    // const mockSetCurrentGuess = jest.fn();
+    // React.useState = jest.fn(() => ["", mockSetCurrentGuess]);
 
-    const wrapper = setup();
+    // const wrapper = setup();
     const inputBox = findByTestAttr(wrapper, "input-box");
 
     const mockEvent = { target: { value: "train" } };
@@ -57,4 +68,12 @@ describe("state controlled input field", () => {
 
   //   expect(mockSetCurrentGuess_des).toHaveBeenCalledWith("train");
   // });
+
+  test("setCurrentGuess gets called with submit button", () => {
+    // const mockEvent = {D}
+    const form = findByTestAttr(wrapper, "submit-button");
+    form.simulate("submit", {});
+
+    expect(mockSetCurrentGuess).toHaveBeenCalledWith("");
+  });
 });

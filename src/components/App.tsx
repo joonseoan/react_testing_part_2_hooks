@@ -10,7 +10,7 @@ function App() {
       <GuessedWords
         guessedWords={[{ guessedWord: "train", letterMatchCount: 3 }]}
       />
-      {/* <Input /> */}
+      <Input />
     </div>
   );
 }
