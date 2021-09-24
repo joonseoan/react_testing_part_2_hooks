@@ -15,14 +15,13 @@ const Input: React.FC<InputProps> = ({ secretWord }) => {
   // const { useState } = React;
   // const [currentGuess_des, setCurrentGuess_des] = useState<string>("");
 
-  const handleOnSubmit = (event: FormEvent) => {
-    event.preventDefault();
+  const handleOnSubmit = () => {
     setCurrentGuess("");
   };
 
   return (
     <div data-test="component-input">
-      <form className="form-inline" onSubmit={handleOnSubmit}>
+      <form className="form-inline">
         <input
           data-test="input-box"
           className="mb-2 mx-sm-3"
@@ -38,7 +37,11 @@ const Input: React.FC<InputProps> = ({ secretWord }) => {
             // setCurrentGuess_des(event.target.value);
           }}
         />
-        <button data-test="submit-button" className="btn btn-primary mb-2">
+        <button
+          data-test="submit-button"
+          onClick={handleOnSubmit}
+          className="btn btn-primary mb-2"
+        >
           Submit
         </button>
       </form>

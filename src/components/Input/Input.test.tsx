@@ -31,15 +31,30 @@ test("does not throw warning with expected props", () => {
 });
 
 describe("state controlled input field", () => {
-  let wrapper: ShallowWrapper;
-
   const mockSetCurrentGuess = jest.fn();
 
+  let wrapper: ShallowWrapper;
+
+  // [Important]
+  // we need to clear jest mock but also clear useState value as well.
+  let originalUseState: (test: string) => [test: string, setTest: () => void];
+
   beforeEach(() => {
-    jest.clearAllMocks();
+    // 2)
+    mockSetCurrentGuess.mockClear();
+
+    // 1)
+    // jest.clearAllMocks();
+
+    // set useState to originalUseState.
+    originalUseState = React.useState;
 
     React.useState = jest.fn(() => ["", mockSetCurrentGuess]);
     wrapper = setup();
+  });
+
+  afterEach(() => {
+    React.useState = originalUseState;
   });
 
   // Without destructuring
@@ -71,9 +86,9 @@ describe("state controlled input field", () => {
 
   test("setCurrentGuess gets called with submit button", () => {
     // const mockEvent = {D}
-    const form = findByTestAttr(wrapper, "submit-button");
-    form.simulate("submit", {});
+    const submit = findByTestAttr(wrapper, "submit-button");
+    submit.simulate("click");
 
-    expect(mockSetCurrentGuess).toHaveBeenCalledWith("");
+    expect(mockSetCurrentGuess).toBeCalled();
   });
 });
