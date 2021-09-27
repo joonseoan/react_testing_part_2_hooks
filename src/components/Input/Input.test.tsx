@@ -37,7 +37,10 @@ describe("state controlled input field", () => {
 
   // [Important]
   // we need to clear jest mock but also clear useState value as well.
-  let originalUseState: (test: string) => [test: string, setTest: () => void];
+  // [Important!!!!!]
+  // Need to satisfy the type : jest.fn(() => ["", mockSetCurrentGuess]); 
+  //   ‘,not function useState<S>(initialState: S | (() => S)): [S, Dispatch<SetStateAction<S>>]; (original useState)
+  let originalUseState: () => [string, (data: string) => void ];
 
   beforeEach(() => {
     // 2)
@@ -48,6 +51,8 @@ describe("state controlled input field", () => {
 
     // set useState to originalUseState.
     originalUseState = React.useState;
+
+    
 
     React.useState = jest.fn(() => ["", mockSetCurrentGuess]);
     wrapper = setup();
