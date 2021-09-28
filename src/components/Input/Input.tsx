@@ -1,13 +1,14 @@
-import React, { FormEvent } from "react";
+import React, { FormEvent, MouseEvent } from "react";
 import PropTypes from "prop-types";
 
 // ?: for now testing with propType.
 export interface InputProps {
+  success?: boolean;
   secretWord?: string;
 }
 
 // React.FC (no destruction) : for now to test
-const Input: React.FC<InputProps> = ({ secretWord }) => {
+const Input: React.FC<InputProps> = ({ success, secretWord }) => {
   // Must use React.useState without destructuring.
   const [currentGuess, setCurrentGuess] = React.useState<string>("");
 
@@ -15,7 +16,8 @@ const Input: React.FC<InputProps> = ({ secretWord }) => {
   // const { useState } = React;
   // const [currentGuess_des, setCurrentGuess_des] = useState<string>("");
 
-  const handleOnSubmit = () => {
+  const handleOnSubmit = (event: FormEvent) => {
+    event.preventDefault();
     setCurrentGuess("");
   };
 
@@ -51,6 +53,7 @@ const Input: React.FC<InputProps> = ({ secretWord }) => {
 
 Input.propTypes = {
   secretWord: PropTypes.string.isRequired,
+  success: PropTypes.bool.isRequired,
 };
 
 export default Input;
