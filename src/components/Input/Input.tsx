@@ -12,6 +12,10 @@ const Input: React.FC<InputProps> = ({ success, secretWord }) => {
   // Must use React.useState without destructuring.
   const [currentGuess, setCurrentGuess] = React.useState<string>("");
 
+  if (success) {
+    return <div data-test="component-input" />;
+  }
+
   // Destructuring case
   // const { useState } = React;
   // const [currentGuess_des, setCurrentGuess_des] = useState<string>("");

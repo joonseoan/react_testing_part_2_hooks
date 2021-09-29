@@ -22,19 +22,58 @@ const setup = (success = false, secretWord = "party") => {
 
 describe("render", () => {
   describe("success is true", () => {
+    let wrapper: ShallowWrapper;
+    beforeEach(() => {
+      wrapper = setup(true);
+    });
+
     test("Input renders without error", () => {
-      const wrapper = setup();
+      // const wrapper = setup();
       const inputComponent = findByTestAttr(wrapper, "component-input");
       expect(inputComponent.length).toBe(1);
     });
+
+    test("input box does not show", () => {
+      const inputBox = findByTestAttr(wrapper, "input-box");
+      // "exist" from enzyme!!
+      expect(inputBox.exists()).toBe(false);
+    });
+
+    test("submit button does not show", () => {
+      const submitButton = findByTestAttr(wrapper, "submit-button");
+      expect(submitButton.exists()).toBe(false);
+    });
   });
 
-  describe("success is false", () => {});
+  describe("success is false", () => {
+    let wrapper: ShallowWrapper;
+    beforeEach(() => {
+      // when success is false
+      wrapper = setup(false);
+    });
+
+    test("Input renders without error", () => {
+      // const wrapper = setup();
+      const inputComponent = findByTestAttr(wrapper, "component-input");
+      expect(inputComponent.length).toBe(1);
+    });
+
+    test("input box shows", () => {
+      const inputBox = findByTestAttr(wrapper, "input-box");
+      // "exist" from enzyme!!
+      expect(inputBox.exists()).toBe(true);
+    });
+
+    test("submit button shows", () => {
+      const submitButton = findByTestAttr(wrapper, "submit-button");
+      expect(submitButton.exists()).toBe(true);
+    });
+  });
 });
 
-test("does not throw warning with expected props", () => {
-  checkProps(Input, { secretWord: "party" });
-});
+// test("does not throw warning with expected props", () => {
+//   checkProps(Input, { secretWord: "party" });
+// });
 
 describe("state controlled input field", () => {
   const mockSetCurrentGuess = jest.fn();
