@@ -4,7 +4,11 @@ import Congrats from "./Congrats_1/Congrats";
 
 function App() {
   return (
-    <div className="container" style={{ textAlign: "center" }}>
+    <div
+      data-test="component-app"
+      className="container"
+      style={{ textAlign: "center" }}
+    >
       <h1>Jotto</h1>
       <Congrats success={true} />
       <GuessedWords
