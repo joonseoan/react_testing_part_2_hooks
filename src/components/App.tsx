@@ -1,8 +1,15 @@
+import { FC } from "react";
 import Input from "./Input/Input";
 import GuessedWords from "./GuessWord_2/GuessWord";
 import Congrats from "./Congrats_1/Congrats";
 
-function App() {
+interface AppProps {
+  success?: boolean;
+  guessedWords?: [];
+  secretWord?: string;
+}
+
+const App: FC<AppProps> = ({ success, guessedWords, secretWord }) => {
   return (
     <div
       data-test="component-app"
@@ -10,13 +17,15 @@ function App() {
       style={{ textAlign: "center" }}
     >
       <h1>Jotto</h1>
-      <Congrats success={true} />
+      <Congrats success={success} />
       <GuessedWords
-        guessedWords={[{ guessedWord: "train", letterMatchCount: 3 }]}
+        guessedWords={guessedWords}
+
+        // guessedWords={[{ guessedWord: "train", letterMatchCount: 3 }]}
       />
-      <Input />
+      <Input success={success} secretWord={secretWord} />
     </div>
   );
-}
+};
 
 export default App;

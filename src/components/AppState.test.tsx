@@ -1,25 +1,50 @@
 import { findByTestAttr } from "../test/testUtil";
-import { mount } from "enzyme";
+import { mount, ReactWrapper } from "enzyme";
 import App from "./App";
-import { toUnicode } from "punycode";
 
-// const setup = (state = {}) => {
-//   // So now we test "guess a word every single time something changes"
+interface GuessedWord {
+  guessedWord: string;
+  letterMatchCount: number;
+}
+interface DefaultState {
+  success?: boolean;
+  secretWord?: string;
+  guessedWords?: GuessedWord[];
+}
 
-//   // @TODO: apply state.
-//   const wrapper = mount(<App />);
+const setup = ({
+  success = false,
+  secretWord = "",
+  guessedWords = [],
+}: DefaultState) => {
+  // So now we test "guess a word every single time something changes"
 
-//   const inputBox = findByTestAttr(wrapper, "input-box");
-//   inputBox.simulate("change", { target: { value: "train" } });
+  // @TODO: apply state.
+  const wrapper = mount(<App />);
 
-//   const submitButton = findByTestAttr(wrapper, "submit-button");
-//   submitButton.simulate("click", { preventDefault() {} });
+  const inputBox = findByTestAttr(wrapper, "input-box");
+  inputBox.simulate("change", { target: { value: "train" } });
 
-//   return wrapper;
-// };
+  const submitButton = findByTestAttr(wrapper, "submit-button");
+  submitButton.simulate("click", { preventDefault() {} });
+
+  return wrapper;
+};
 
 describe("no words guessed", () => {
-  test("a", () => {});
+  let wrapper: ReactWrapper;
+
+  beforeEach(() => {
+    wrapper = setup({
+      secretWord: "party",
+      guessedWords: [],
+      success: false,
+    });
+  });
+
+  test("creates GuessedWords table with one row", () => {
+    console.log("ddd");
+  });
 });
 
 describe("some words guessed", () => {
