@@ -22,6 +22,7 @@ const setup = ({
   // @TODO: apply state.
   const wrapper = mount(<App />);
 
+  // guessed word
   const inputBox = findByTestAttr(wrapper, "input-box");
   inputBox.simulate("change", { target: { value: "train" } });
 
@@ -43,7 +44,8 @@ describe("no words guessed", () => {
   });
 
   test("creates GuessedWords table with one row", () => {
-    console.log("ddd");
+    const guessedWordRow = findByTestAttr(wrapper, "guessed-word");
+    expect(guessedWordRow).toHaveLength(1);
   });
 });
 

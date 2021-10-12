@@ -1,4 +1,4 @@
-import React, { FormEvent, MouseEvent } from "react";
+import React, { FormEvent } from "react";
 import PropTypes from "prop-types";
 
 // ?: for now testing with propType.

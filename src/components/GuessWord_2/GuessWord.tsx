@@ -8,6 +8,8 @@ interface GuessedWord {
 
 interface GuessedWordsProps {
   guessedWords?: GuessedWord[];
+  // success: boolean;
+  // secretWord: string;
 }
 
 // any: just for testing. (In reality, typescript should not use propTypes.)
