@@ -14,4 +14,8 @@
   - only: only run test/describe with .only specified.
   - skip: don't run any test/describe with .skip specified.
   - todo: filter out irrelevant test results until you are ready for them. for tests to remind to write: .todo.
+
+
+4. Axios test
+  - axios: npm install axios
   
