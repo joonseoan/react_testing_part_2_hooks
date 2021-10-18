@@ -1,3 +1,8 @@
+/** Functional Test */
+// 1. in put props from the most parents
+// 2, simulate the change
+// 3. use mount(<App />) for the children component test
+
 import { findByTestAttr } from "../test/testUtil";
 import { mount, ReactWrapper } from "enzyme";
 import App from "./App";

@@ -1,4 +1,3 @@
-import { doesNotReject } from "assert";
 import moxios from "moxios";
 import { getSecretWord } from "./index";
 
@@ -13,7 +12,7 @@ describe("getSecretWord", () => {
     moxios.uninstall();
   });
 
-  test("secretWord is returned", async () => {
+  test("secretWord is returned", () => {
     //.wait is for asynchronous function
     moxios.wait(() => {
       // moxios mock requests instead of http
@@ -27,12 +26,12 @@ describe("getSecretWord", () => {
     });
 
     // update to test app in Redux / context section
-    const secretWord = await getSecretWord();
-    expect(secretWord).toBe("party");
+    // const secretWord = await getSecretWord();
+    // expect(secretWord).toBe("party");
 
-    // return getSecretWord().then((secretWord) => {
-    //   expect(secretWord).toBe("party");
-    // });
+    return getSecretWord().then((secretWord) => {
+      expect(secretWord).toBe("party");
+    });
 
     // 1) old
     // return getSecretWord()
