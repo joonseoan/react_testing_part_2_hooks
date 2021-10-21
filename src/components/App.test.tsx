@@ -3,15 +3,13 @@
 import { findByTestAttr } from "../test/testUtil";
 import { shallow, mount, ShallowWrapper, ReactWrapper } from "enzyme";
 import App from "./App";
-import { ReactNode } from "react";
+// This mock function getSecretWord action now is going to be "getSecretWord" in project "__mock__"
 
 // activate global mock to make sure getSecretWord does not make network call
 // Yeah. it is index.ts in "./action".
 // The way of mocking the function.
-jest.mock("./actions");
-
-// This mock function getSecretWord action now is going to be "getSecretWord" in project "__mock__"
-// import { getSecretWord as mockGetSecretWord } from "../actions";
+jest.mock("../actions");
+import { getSecretWord as mockGetSecretWord } from "../actions";
 
 /**
  * Setup ShallowWrapper.
@@ -34,7 +32,19 @@ test("renders without error", () => {
 });
 
 describe("get secret word", () => {
-  test("get getSecretWord on app mount", () => {});
+  beforeEach(() => {
+    // clear the mock call
+    jest.clearAllMocks();
+  });
+  test("get getSecretWord on app mount", () => {
+    const wrapper = setup();
+    expect(mockGetSecretWord).toHaveBeenCalledTimes(1);
+  });
 
-  test("getSecretWord does not run on app update", () => {});
+  test("getSecretWord does not run on app update", () => {
+    const wapper = setup();
+    jest.clearAllMocks();
+
+    expect(mockGetSecretWord).toHaveBeenCalledTimes(0);
+  });
 });

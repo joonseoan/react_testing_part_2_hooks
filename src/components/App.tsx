@@ -23,7 +23,7 @@ const App: FC = () => {
       style={{ textAlign: "center" }}
     >
       <h1>Jotto</h1>
-      <Congrats success={success} />
+      <Congrats success={success} />{" "}
       <Input success={success} secretWord={secretWord} />
       <GuessedWords
         guessedWords={guessedWords}

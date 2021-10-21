@@ -1,3 +1,5 @@
+// Basic moxios for redux.
+
 import moxios from "moxios";
 import { getSecretWord } from "./index";
 
