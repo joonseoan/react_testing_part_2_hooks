@@ -1,7 +1,8 @@
-import { FC } from "react";
+import { FC, useEffect } from "react";
 import Input from "./Input/Input";
 import GuessedWords from "./GuessWord_2/GuessWord";
 import Congrats from "./Congrats_1/Congrats";
+import { getSecretWord } from "../actions";
 
 // interface AppProps {
 //   success?: boolean;
@@ -15,6 +16,10 @@ const App: FC = () => {
   const success = false;
   const secretWord = "party";
   const guessedWords: {}[] = [];
+
+  useEffect(() => {
+    getSecretWord();
+  }, []);
 
   return (
     <div

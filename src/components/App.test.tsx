@@ -4,12 +4,12 @@ import { findByTestAttr } from "../test/testUtil";
 import { shallow, mount, ShallowWrapper, ReactWrapper } from "enzyme";
 import App from "./App";
 // This mock function getSecretWord action now is going to be "getSecretWord" in project "__mock__"
+import { getSecretWord as mockGetSecretWord } from "../actions";
 
 // activate global mock to make sure getSecretWord does not make network call
 // Yeah. it is index.ts in "./action".
 // The way of mocking the function.
 jest.mock("../actions");
-import { getSecretWord as mockGetSecretWord } from "../actions";
 
 /**
  * Setup ShallowWrapper.
@@ -43,7 +43,10 @@ describe("get secret word", () => {
 
   test("getSecretWord does not run on app update", () => {
     const wapper = setup();
-    jest.clearAllMocks();
+    // jest.clearAllMocks();
+
+    // using setProps because wrapper.update() does not trigger useEffect.
+    // wrapper.setProps({});
 
     expect(mockGetSecretWord).toHaveBeenCalledTimes(0);
   });
