@@ -1,7 +1,7 @@
 // useEffect test.
 
 import { findByTestAttr } from "../test/testUtil";
-import { shallow, mount, ShallowWrapper, ReactWrapper } from "enzyme";
+import { mount, ReactWrapper } from "enzyme";
 import App from "./App";
 // This mock function getSecretWord action now is going to be "getSecretWord" in project "__mock__"
 import { getSecretWord as mockGetSecretWord } from "../actions";
@@ -42,12 +42,11 @@ describe("get secret word", () => {
   });
 
   test("getSecretWord does not run on app update", () => {
-    const wapper = setup();
-    // jest.clearAllMocks();
-
-    // using setProps because wrapper.update() does not trigger useEffect.
-    // wrapper.setProps({});
-
+    const wrapper = setup();
+    jest.clearAllMocks();
+    // using setProps because wrapper.update() does not trigger useEffect, for now.
+    // https://github.com/enzymejs/enzyme/issues/2254
+    wrapper.setProps({});
     expect(mockGetSecretWord).toHaveBeenCalledTimes(0);
   });
 });
