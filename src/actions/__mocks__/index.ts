@@ -1,3 +1,6 @@
+// because of module.exports.
+export {};
+
 module.exports = {
   ...jest.requireActual(".."),
   __esModule: true,
