@@ -1,4 +1,4 @@
-import { FC, useEffect } from "react";
+import { FC, useEffect, useState, useReducer } from "react";
 import Input from "./Input/Input";
 import GuessedWords from "./GuessWord_2/GuessWord";
 import Congrats from "./Congrats_1/Congrats";
@@ -10,15 +10,36 @@ import { getSecretWord } from "../actions";
 //   secretWord?: string;
 // }
 
+interface ReducerState {
+  secretWord: string;
+}
+
+interface Action {
+  type: string;
+  payload: string;
+}
+
+// reducer example
+/**
+ * @function reducer to update state, automatically called by dispatch.
+ * @param state {object} - previous state
+ * @param action {object} - 'type' and 'payload' properties.
+ * @param return {object} - new state.
+ */
+const reducer = (state: ReducerState, action: Action) => {};
+
 const App: FC = () => {
-  //TODO: get props from shared state.
+  // // reducer
+  // const [state, dispatch] = useReducer(reducer, { secretWord: '' });
+
+  // 1) local state
+  const [secretWord, setSecretWord] = useState("");
 
   const success = false;
-  const secretWord = "party";
   const guessedWords: {}[] = [];
 
   useEffect(() => {
-    getSecretWord();
+    // getSecretWord(setSecretWord);
   }, []);
 
   return (

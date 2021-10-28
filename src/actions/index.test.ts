@@ -1,4 +1,4 @@
-// Basic moxios for redux.
+// Basic moxios for redux or context.
 
 import moxios from "moxios";
 import { getSecretWord } from "./index";
@@ -14,7 +14,7 @@ describe("getSecretWord", () => {
     moxios.uninstall();
   });
 
-  test("secretWord is returned", () => {
+  test("secretWord is returned", async () => {
     //.wait is for asynchronous function
     moxios.wait(() => {
       // moxios mock requests instead of http
@@ -27,18 +27,17 @@ describe("getSecretWord", () => {
       });
     });
 
-    // update to test app in Redux / context section
-    // const secretWord = await getSecretWord();
-    // expect(secretWord).toBe("party");
+    // 2) with callback from the component.
+    // it is from component to be a role of "setSecretWord"
+    // [Important]: mock for useState's set function!
+    const mockSetSecretWord = jest.fn();
+    await getSecretWord(mockSetSecretWord);
+    // the setState will be called with "party" from the server.
+    expect(mockSetSecretWord).toBeCalledWith("party");
 
-    return getSecretWord().then((secretWord) => {
-      expect(secretWord).toBe("party");
-    });
-
-    // 1) old
-    // return getSecretWord()
-    //   .then(secretWord => {
-    //     expect(secretWord).toBe('party');
-    //   })
+    // 1) without callback from the component
+    // return getSecretWord().then((secretWord) => {
+    //   expect(secretWord).toBe("party");
+    // });
   });
 });
