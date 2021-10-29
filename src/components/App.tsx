@@ -19,28 +19,43 @@ interface Action {
   payload: string;
 }
 
-// reducer example
+// [important] Reducer example
 /**
  * @function reducer to update state, automatically called by dispatch.
  * @param state {object} - previous state
  * @param action {object} - 'type' and 'payload' properties.
  * @param return {object} - new state.
  */
-const reducer = (state: ReducerState, action: Action) => {};
+const reducer = (state: ReducerState, action: Action) => {
+  switch (action.type) {
+    case "setSecretWord":
+      return { ...state, secretWord: action.payload };
+
+    default:
+      throw new Error(`invalid action type: ${action.type}`);
+  }
+};
 
 const App: FC = () => {
   // // reducer
-  // const [state, dispatch] = useReducer(reducer, { secretWord: '' });
+  const [state, dispatch] = useReducer(reducer, { secretWord: "" });
 
   // 1) local state
-  const [secretWord, setSecretWord] = useState("");
+  // const [secretWord, setSecretWord] = useState("");
 
+  // TODO: get props from sharing state.
   const success = false;
   const guessedWords: {}[] = [];
 
+  const setSecretWord = (secretWord: string) => {
+    dispatch({ type: "secretWord", payload: secretWord });
+  };
+
   useEffect(() => {
-    // getSecretWord(setSecretWord);
+    getSecretWord(setSecretWord);
   }, []);
+
+  const { secretWord } = state || {};
 
   return (
     <div
