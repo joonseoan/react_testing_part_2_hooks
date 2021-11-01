@@ -1,10 +1,17 @@
 // useEffect test.
 
 import { findByTestAttr } from "../test/testUtil";
+import {
+  Dispatch,
+  useReducer,
+  ReducerStateWithoutAction,
+  DispatchWithoutAction,
+} from "react";
 import { mount, ReactWrapper } from "enzyme";
 import App from "./App";
 // This mock function getSecretWord action now is going to be "getSecretWord" in project "__mock__"
 import { getSecretWord as mockGetSecretWord } from "../actions";
+import { userInfo } from "os";
 
 // activate global mock to make sure getSecretWord does not make network call
 // Yeah. it is index.ts in "./action".
@@ -25,11 +32,47 @@ const setup = () => {
 // let wrapper: ShallowWrapper;
 let wrapper: ReactWrapper;
 
-test("renders without error", () => {
-  wrapper = setup();
-  const appComponent = findByTestAttr(wrapper, "component-app");
-  expect(appComponent).toHaveLength(1);
-});
+// [Important]: to do the same tests with the different parameters.
+// For instance, the spinner
+describe.each([
+  // while loading,
+  // 1) secretWord: null
+  // 2) loadingShows: true,
+  // 3) appShows: false
+  [null, true, false],
+  ["party", false, true],
+])(
+  // %s: take the first argument ans use it as string!!
+  "renders with secretWord as %s",
+  (secretWord: string | null, loadingShows: boolean, appShows: boolean) => {
+    let wrapper: ReactWrapper;
+    let originalReducer: [
+      ReducerStateWithoutAction<any>,
+      DispatchWithoutAction
+    ];
+    // let originalReducer: () => [{ secretWord: string }, ({ type: string, payload: string }) => void] ;
+
+    beforeEach(() => {
+      originalReducer = useReducer;
+      const mockUseReducer = jest.fn().mockReturnValue([
+        { secretWord }, // state
+        jest.fn(), // dispatch
+      ]);
+
+      useReducer = mockUseReducer;
+    });
+
+    afterEach(() => {
+      useReducer = originalReducer;
+    });
+  }
+);
+
+// test("renders without error", () => {
+//   wrapper = setup();
+//   const appComponent = findByTestAttr(wrapper, "component-app");
+//   expect(appComponent).toHaveLength(1);
+// });
 
 describe("get secret word", () => {
   beforeEach(() => {
