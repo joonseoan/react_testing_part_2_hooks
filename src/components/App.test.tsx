@@ -1,9 +1,10 @@
 // useEffect test.
 
 import { findByTestAttr } from "../test/testUtil";
-import {
+import React, {
   Dispatch,
   useReducer,
+  ReducerWithoutAction,
   ReducerStateWithoutAction,
   DispatchWithoutAction,
 } from "react";
@@ -46,24 +47,24 @@ describe.each([
   "renders with secretWord as %s",
   (secretWord: string | null, loadingShows: boolean, appShows: boolean) => {
     let wrapper: ReactWrapper;
-    let originalReducer: [
-      ReducerStateWithoutAction<any>,
-      DispatchWithoutAction
-    ];
-    // let originalReducer: () => [{ secretWord: string }, ({ type: string, payload: string }) => void] ;
+    let originalReducer: Function;
+    // function <R extends ReducerWithoutAction<any>, I>(reducer: R, initializerArg: I, initializer: (arg: I) => ReducerStateWithoutAction<R>) => [ReducerStateWithoutAction<R>, DispatchWithoutAction]
+
+    // const [state, dispatch] = useReducer(reducer, { secretWord: "" });
 
     beforeEach(() => {
-      originalReducer = useReducer;
+      originalReducer = React.useReducer;
+
       const mockUseReducer = jest.fn().mockReturnValue([
         { secretWord }, // state
         jest.fn(), // dispatch
       ]);
 
-      useReducer = mockUseReducer;
+      React.useReducer = mockUseReducer;
     });
 
     afterEach(() => {
-      useReducer = originalReducer;
+      React["useReducer"] = originalReducer;
     });
   }
 );
