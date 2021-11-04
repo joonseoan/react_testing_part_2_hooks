@@ -2,9 +2,7 @@
 
 import { findByTestAttr } from "../test/testUtil";
 import React, {
-  Dispatch,
-  useReducer,
-  ReducerWithoutAction,
+  Reducer,
   ReducerStateWithoutAction,
   DispatchWithoutAction,
 } from "react";
@@ -12,7 +10,6 @@ import { mount, ReactWrapper } from "enzyme";
 import App from "./App";
 // This mock function getSecretWord action now is going to be "getSecretWord" in project "__mock__"
 import { getSecretWord as mockGetSecretWord } from "../actions";
-import { userInfo } from "os";
 
 // activate global mock to make sure getSecretWord does not make network call
 // Yeah. it is index.ts in "./action".
@@ -47,10 +44,10 @@ describe.each([
   "renders with secretWord as %s",
   (secretWord: string | null, loadingShows: boolean, appShows: boolean) => {
     let wrapper: ReactWrapper;
-    let originalReducer: Function;
-    // function <R extends ReducerWithoutAction<any>, I>(reducer: R, initializerArg: I, initializer: (arg: I) => ReducerStateWithoutAction<R>) => [ReducerStateWithoutAction<R>, DispatchWithoutAction]
-
-    // const [state, dispatch] = useReducer(reducer, { secretWord: "" });
+    let originalReducer: <R extends Reducer<any, any>, I>(
+      reducer: R,
+      initializerArg: I
+    ) => [ReducerStateWithoutAction<R>, DispatchWithoutAction];
 
     beforeEach(() => {
       originalReducer = React.useReducer;
@@ -64,7 +61,7 @@ describe.each([
     });
 
     afterEach(() => {
-      React["useReducer"] = originalReducer;
+      React.useReducer = originalReducer;
     });
   }
 );

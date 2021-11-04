@@ -1,4 +1,4 @@
-import { FC, useEffect, useState, useReducer } from "react";
+import { FC, useEffect, useReducer } from "react";
 import Input from "./Input/Input";
 import GuessedWords from "./GuessWord_2/GuessWord";
 import Congrats from "./Congrats_1/Congrats";
@@ -32,7 +32,7 @@ const reducer = (state: ReducerState, action: Action) => {
       return { ...state, secretWord: action.payload };
 
     default:
-      throw new Error(`invalid action type: ${action.type}`);
+      return state;
   }
 };
 
@@ -66,11 +66,7 @@ const App: FC = () => {
       <h1>Jotto</h1>
       <Congrats success={success} />{" "}
       <Input success={success} secretWord={secretWord} />
-      <GuessedWords
-        guessedWords={guessedWords}
-
-        // guessedWords={[{ guessedWord: "train", letterMatchCount: 3 }]}
-      />
+      <GuessedWords guessedWords={guessedWords} />
     </div>
   );
 };
