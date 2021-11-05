@@ -11,7 +11,7 @@ import { getSecretWord } from "../actions";
 // }
 
 interface ReducerState {
-  secretWord: string;
+  secretWord: string | null;
 }
 
 interface Action {
@@ -38,7 +38,7 @@ const reducer = (state: ReducerState, action: Action) => {
 
 const App: FC = () => {
   // // reducer
-  const [state, dispatch] = useReducer(reducer, { secretWord: "" });
+  const [state, dispatch] = useReducer(reducer, { secretWord: null });
 
   // 1) local state
   // const [secretWord, setSecretWord] = useState("");
@@ -48,6 +48,7 @@ const App: FC = () => {
   const guessedWords: {}[] = [];
 
   const setSecretWord = (secretWord: string) => {
+    console.log("secretWord: ---> ", secretWord);
     dispatch({ type: "secretWord", payload: secretWord });
   };
 
@@ -55,7 +56,18 @@ const App: FC = () => {
     getSecretWord(setSecretWord);
   }, []);
 
-  const { secretWord } = state || {};
+  console.log("state.secretWord: ", state.secretWord);
+
+  if (!state.secretWord) {
+    return (
+      <div className="spinner" data-test="spinner">
+        <div className="spinner-border" role="status">
+          <span className="sr-only">Loading....</span>
+        </div>
+        <div>Loading secret word...</div>
+      </div>
+    );
+  }
 
   return (
     <div
@@ -65,7 +77,7 @@ const App: FC = () => {
     >
       <h1>Jotto</h1>
       <Congrats success={success} />{" "}
-      <Input success={success} secretWord={secretWord} />
+      <Input success={success} secretWord={state.secretWord} />
       <GuessedWords guessedWords={guessedWords} />
     </div>
   );

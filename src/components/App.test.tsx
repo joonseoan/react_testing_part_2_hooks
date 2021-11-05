@@ -30,7 +30,7 @@ const setup = () => {
 // let wrapper: ShallowWrapper;
 let wrapper: ReactWrapper;
 
-// [Important]: to do the same tests with the different parameters.
+// [Important]: to do the same tests repeatedly with the different parameters.
 // For instance, the spinner
 describe.each([
   // while loading,
@@ -43,7 +43,7 @@ describe.each([
   // %s: take the first argument ans use it as string!!
   "renders with secretWord as %s",
   (secretWord: string | null, loadingShows: boolean, appShows: boolean) => {
-    let wrapper: ReactWrapper;
+    wrapper = setup();
     let originalReducer: <R extends Reducer<any, any>, I>(
       reducer: R,
       initializerArg: I
@@ -62,6 +62,16 @@ describe.each([
 
     afterEach(() => {
       React.useReducer = originalReducer;
+    });
+
+    test(`renders loading spinner: ${loadingShows}`, () => {
+      const spinnerComponent = findByTestAttr(wrapper, "spinner");
+      expect(spinnerComponent).toBe(loadingShows);
+    });
+
+    test(`render apps: ${appShows}`, () => {
+      const appComponent = findByTestAttr(wrapper, "component-app");
+      expect(appComponent).toBe(appShows);
     });
   }
 );
