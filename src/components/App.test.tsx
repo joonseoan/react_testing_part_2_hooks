@@ -8,6 +8,7 @@ import React, {
 } from "react";
 import { mount, ReactWrapper } from "enzyme";
 import App from "./App";
+
 // This mock function getSecretWord action now is going to be "getSecretWord" in project "__mock__"
 import { getSecretWord as mockGetSecretWord } from "../actions";
 
@@ -17,7 +18,7 @@ import { getSecretWord as mockGetSecretWord } from "../actions";
 jest.mock("../actions");
 
 /**
- * Setup ShallowWrapper.
+ * Setup Mount.
  * @returns {ReactNode}
  */
 const setup = () => {
@@ -26,9 +27,6 @@ const setup = () => {
   // https://github.com/airbnb/enzyme/issues/2086
   return mount(<App />);
 };
-
-// let wrapper: ShallowWrapper;
-let wrapper: ReactWrapper;
 
 // [Important]: to do the same tests repeatedly with the different parameters.
 // For instance, the spinner
@@ -43,11 +41,11 @@ describe.each([
   // %s: take the first argument ans use it as string!!
   "renders with secretWord as %s",
   (secretWord: string | null, loadingShows: boolean, appShows: boolean) => {
-    wrapper = setup();
+    let wrapper = setup();
     let originalReducer: <R extends Reducer<any, any>, I>(
       reducer: R,
       initializerArg: I
-    ) => [ReducerStateWithoutAction<R>, DispatchWithoutAction];
+    ) => [ReducerStateWithoutAction<any>, DispatchWithoutAction];
 
     beforeEach(() => {
       originalReducer = React.useReducer;
@@ -58,6 +56,8 @@ describe.each([
       ]);
 
       React.useReducer = mockUseReducer;
+
+      wrapper = setup();
     });
 
     afterEach(() => {
@@ -66,12 +66,14 @@ describe.each([
 
     test(`renders loading spinner: ${loadingShows}`, () => {
       const spinnerComponent = findByTestAttr(wrapper, "spinner");
-      expect(spinnerComponent).toBe(loadingShows);
+      // exists on mount
+      expect(spinnerComponent.exists()).toBe(loadingShows);
     });
 
     test(`render apps: ${appShows}`, () => {
       const appComponent = findByTestAttr(wrapper, "component-app");
-      expect(appComponent).toBe(appShows);
+      // exists on mount
+      expect(appComponent.exists()).toBe(appShows);
     });
   }
 );

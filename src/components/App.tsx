@@ -19,6 +19,10 @@ interface Action {
   payload: string;
 }
 
+const defaultState: ReducerState = {
+  secretWord: null,
+};
+
 // [important] Reducer example
 /**
  * @function reducer to update state, automatically called by dispatch.
@@ -26,7 +30,7 @@ interface Action {
  * @param action {object} - 'type' and 'payload' properties.
  * @param return {object} - new state.
  */
-const reducer = (state: ReducerState, action: Action) => {
+const reducer = (state: ReducerState = defaultState, action: Action) => {
   switch (action.type) {
     case "setSecretWord":
       return { ...state, secretWord: action.payload };
@@ -48,15 +52,12 @@ const App: FC = () => {
   const guessedWords: {}[] = [];
 
   const setSecretWord = (secretWord: string) => {
-    console.log("secretWord: ---> ", secretWord);
-    dispatch({ type: "secretWord", payload: secretWord });
+    dispatch({ type: "setSecretWord", payload: secretWord });
   };
 
   useEffect(() => {
     getSecretWord(setSecretWord);
   }, []);
-
-  console.log("state.secretWord: ", state.secretWord);
 
   if (!state.secretWord) {
     return (
