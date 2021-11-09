@@ -1,5 +1,3 @@
-// useEffect test.
-
 import { findByTestAttr } from "../test/testUtil";
 import React, {
   Reducer,
@@ -28,6 +26,7 @@ const setup = () => {
   return mount(<App />);
 };
 
+// [useReducer]
 // [Important]: to do the same tests repeatedly with the different parameters.
 // For instance, the spinner
 describe.each([
@@ -77,6 +76,8 @@ describe.each([
     });
   }
 );
+
+// useEffect with Mock
 
 // test("renders without error", () => {
 //   wrapper = setup();
