@@ -19,7 +19,7 @@ const languageStrings = {
   },
 };
 
-type LanguageKCode = "en" | "emoji";
+type LanguageKCode = "en" | "emoji" | "mermish";
 type StringKey =
   | "congrats"
   | "submit"
@@ -32,12 +32,12 @@ type StringKey =
 function getStringByLanguage(
   languageCode: LanguageKCode,
   stringKey: StringKey,
-  strings = languageStrings
+  strings: any = languageStrings // I do not know yet which type of object will come to pass.
 ) {
   if (!strings[languageCode] || !strings[languageCode][stringKey]) {
     console.warn(`Could not get string [${stringKey}] for [${languageCode}]`);
 
-    // fall back to english
+    // Fallback plan
     return strings.en[stringKey];
   }
 
