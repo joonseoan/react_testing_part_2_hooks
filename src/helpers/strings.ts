@@ -19,7 +19,7 @@ const languageStrings = {
   },
 };
 
-type LanguageKCode = "en" | "emoji" | "mermish";
+type LanguageKCode = "en" | "emoji" | "mermish" | any;
 type StringKey =
   | "congrats"
   | "submit"
@@ -27,7 +27,8 @@ type StringKey =
   | "guessInputPlaceholder"
   | "guessColumnHeader"
   | "guessedWords"
-  | "matchingLettersColumnHeader";
+  | "matchingLettersColumnHeader"
+  | any;
 
 function getStringByLanguage(
   languageCode: LanguageKCode,
