@@ -6,9 +6,8 @@ import GuessedWords from "./GuessWord";
 
 const defaultProps = {
   guessedWords: [{ guessedWord: "train", letterMatchCount: 3 }],
-  // guessedWords: 'ddd' --->  error
 };
-// console.log('ddd');
+
 /**
  * Factory function to create a ShallowWrapper for the GuessedWords component.
  * @function setup
