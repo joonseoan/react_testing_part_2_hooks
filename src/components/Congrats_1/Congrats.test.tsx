@@ -1,6 +1,6 @@
 /** props test */
 
-import { shallow } from "enzyme";
+import { shallow, mount } from "enzyme";
 
 // since the centralized config
 // import Enzyme, { shallow } from 'enzyme';
@@ -12,6 +12,7 @@ import checkPropTypes from "check-prop-types";
 
 import { findByTestAttr, checkProps } from "../../test/testUtil";
 import Congrats from "./Congrats";
+import languageContext from "../context/languageContext";
 
 // since centralized config
 // Enzyme.configure({ adapter: new EnzymeAdapter() });
@@ -26,13 +27,37 @@ const defaultProps = {
  * @param {object} props Component props specific to this setup.
  * @returns {ShallowWrapper}
  */
-const setup = (props = {}) => {
-  const setupProps = { ...defaultProps, ...props };
-  return shallow(<Congrats {...setupProps} />);
+// 2) With Context
+const setup = ({
+  success,
+  language,
+}: {
+  success?: boolean;
+  language?: string;
+}) => {
+  language ||= "en";
+  success = success === undefined ? false : success;
+
+  return mount(
+    <languageContext.Provider value={language}>
+      <Congrats success={success} />
+    </languageContext.Provider>
+  );
 };
 
+describe("languagePicker", () => {
+  test("correctly renders congrats string in English", () => {});
+  test("correctly renders congrats string in Emoji", () => {});
+});
+
+// 1) Without Context
+// const setup = (props = {}) => {
+//   const setupProps = { ...defaultProps, ...props };
+//   return shallow(<Congrats {...setupProps} />);
+// };
+
 test("renders without error", () => {
-  const wrapper = setup();
+  const wrapper = setup({});
   const component = findByTestAttr(wrapper, "component-congrats");
   expect(component.length).toBe(1);
 });
