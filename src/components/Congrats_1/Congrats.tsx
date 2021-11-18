@@ -1,5 +1,9 @@
 import { FC } from "react";
 import PropTypes from "prop-types";
+import { useContext } from "react";
+
+import languageContext from "../context/languageContext";
+import strings from "../../helpers/strings";
 
 /**
  * Congrats message page.
@@ -7,11 +11,16 @@ import PropTypes from "prop-types";
  * @returns {JSX.Element} - rendered component.
  */
 const Congrats: FC<{ success?: boolean }> = ({ success }) => {
+  const language = useContext<string>(languageContext);
+
   if (success) {
     return (
       <div data-test="component-congrats" className="alert alert-success">
         <span data-test="congrats-message">
-          Congratulations! You guessed the word!
+          {/* By implementing Context */}
+          {strings.getStringByLanguage(language, "congrats")}
+
+          {/* Congratulations! You guessed the word! */}
         </span>
       </div>
     );

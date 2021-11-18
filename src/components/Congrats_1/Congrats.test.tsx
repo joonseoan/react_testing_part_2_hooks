@@ -46,8 +46,14 @@ const setup = ({
 };
 
 describe("languagePicker", () => {
-  test("correctly renders congrats string in English", () => {});
-  test("correctly renders congrats string in Emoji", () => {});
+  test("correctly renders congrats string in English", () => {
+    const wrapper = setup({ success: true });
+    expect(wrapper.text()).toBe("Congratulations! You guessed the word!");
+  });
+  test("correctly renders congrats string in Emoji", () => {
+    const wrapper = setup({ language: "emoji", success: true });
+    expect(wrapper.text()).toBe("🎯🎉");
+  });
 });
 
 // 1) Without Context
