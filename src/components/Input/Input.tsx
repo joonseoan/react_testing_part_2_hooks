@@ -1,5 +1,6 @@
-import React, { FormEvent } from "react";
+import React, { FormEvent, useContext } from "react";
 import PropTypes from "prop-types";
+import languageContext from "../context/languageContext";
 
 // ?: for now testing with propType.
 export interface InputProps {
@@ -9,12 +10,20 @@ export interface InputProps {
 
 // React.FC (no destruction) : for now to test
 const Input: React.FC<InputProps> = ({ success, secretWord }) => {
+  const language = useContext<string>(languageContext);
+
   // Must use React.useState without destructuring.
-  const [currentGuess, setCurrentGuess] = React.useState<string>("");
+  const [inputParams, setInputParameter] = React.useState<{
+    currentGuess: string;
+    language: string;
+    secretWord: string;
+  }>({ currentGuess: "", language, secretWord: "" });
 
   if (success) {
     return <div data-test="component-input" />;
   }
+
+  console.log("inputParams: ", inputParams);
 
   // Destructuring case
   // const { useState } = React;
@@ -22,7 +31,10 @@ const Input: React.FC<InputProps> = ({ success, secretWord }) => {
 
   const handleOnSubmit = (event: FormEvent) => {
     event.preventDefault();
-    setCurrentGuess("");
+    setInputParameter({
+      ...inputParams,
+      currentGuess: "",
+    });
   };
 
   return (
@@ -33,12 +45,14 @@ const Input: React.FC<InputProps> = ({ success, secretWord }) => {
           className="mb-2 mx-sm-3"
           type="text"
           placeholder="enter guess"
-          value={currentGuess}
+          value={inputParams.currentGuess}
           // Destructuring case
           // value={currentGuess_des}
           onChange={(event) => {
-            setCurrentGuess(event.target.value);
-
+            setInputParameter({
+              ...inputParams,
+              currentGuess: event.target.value,
+            });
             // Destructuring case
             // setCurrentGuess_des(event.target.value);
           }}
@@ -61,3 +75,5 @@ Input.propTypes = {
 };
 
 export default Input;
+
+// need to do test next week.
