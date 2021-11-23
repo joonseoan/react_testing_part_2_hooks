@@ -25,18 +25,8 @@ const Input: React.FC<InputProps> = ({ success, secretWord }) => {
     return <div data-test="component-input" />;
   }
 
-  // console.log("inputParams: ", inputParams);
-
-  // Destructuring case
-  // const { useState } = React;
-  // const [currentGuess_des, setCurrentGuess_des] = useState<string>("");
-
   const handleOnSubmit = (event: FormEvent) => {
     event.preventDefault();
-    // setInputParameter({
-    //   ...inputParams,
-    //   currentGuess: "",
-    // });
   };
 
   return (
@@ -46,15 +36,15 @@ const Input: React.FC<InputProps> = ({ success, secretWord }) => {
           data-test="input-box"
           className="mb-2 mx-sm-3"
           type="text"
-          placeholder="enter guess"
-          // value={inputParams.currentGuess}
+          placeholder={stringsModule.getStringByLanguage(
+            language,
+            "guessInputPlaceholder"
+          )}
+          value={currentGuess}
           // Destructuring case
           // value={currentGuess_des}
           onChange={(event) => {
-            // setInputParameter({
-            //   ...inputParams,
-            //   currentGuess: event.target.value,
-            // });
+            setCurrentGuess(event.target.value);
             // Destructuring case
             // setCurrentGuess_des(event.target.value);
           }}
@@ -64,7 +54,7 @@ const Input: React.FC<InputProps> = ({ success, secretWord }) => {
           onClick={handleOnSubmit}
           className="btn btn-primary mb-2"
         >
-          Submit
+          {stringsModule.getStringByLanguage(language, "submit")}
         </button>
       </form>
     </div>

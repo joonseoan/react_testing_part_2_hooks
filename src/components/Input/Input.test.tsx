@@ -26,9 +26,9 @@ interface InputTestProps {
 }
 
 const setup = ({ language, secretWord, success }: InputTestProps) => {
-  language = language || "en";
-  secretWord = secretWord || "party";
-  success = success || false;
+  language ||= "en";
+  secretWord ||= "party";
+  success ||= false;
 
   return mount(
     <languageContext.Provider value={language}>
@@ -44,6 +44,7 @@ const setup = ({ language, secretWord, success }: InputTestProps) => {
 describe("render", () => {
   describe("success is true", () => {
     let wrapper: ReactWrapper;
+
     beforeEach(() => {
       wrapper = setup({ success: false });
     });
