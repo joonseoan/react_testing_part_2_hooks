@@ -21,12 +21,13 @@ const Input: React.FC<InputProps> = ({ success, secretWord }) => {
   //   secretWord: string;
   // }>({ currentGuess: "", language, secretWord: "" });
 
-  if (success) {
-    return <div data-test="component-input" />;
-  }
+  // if (success) {
+  //   return <div data-test="component-input" />;
+  // }
 
   const handleOnSubmit = (event: FormEvent) => {
     event.preventDefault();
+    setCurrentGuess("");
   };
 
   return (

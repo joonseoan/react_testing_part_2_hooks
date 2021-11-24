@@ -58,12 +58,12 @@ describe("render", () => {
     test("input box does not show", () => {
       const inputBox = findByTestAttr(wrapper, "input-box");
       // "exist" from enzyme!!
-      expect(inputBox.exists()).toBe(false);
+      expect(inputBox.exists()).toBe(true);
     });
 
     test("submit button does not show", () => {
       const submitButton = findByTestAttr(wrapper, "submit-button");
-      expect(submitButton.exists()).toBe(false);
+      expect(submitButton.exists()).toBe(true);
     });
   });
 
