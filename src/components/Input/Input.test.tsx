@@ -26,9 +26,9 @@ interface InputTestProps {
 }
 
 const setup = ({ language, secretWord, success }: InputTestProps) => {
-  language = language || "en";
-  secretWord = secretWord || "party";
-  success = success || false;
+  language ||= "en";
+  secretWord ||= "party";
+  success ||= false;
 
   return mount(
     <languageContext.Provider value={language}>
@@ -37,9 +37,9 @@ const setup = ({ language, secretWord, success }: InputTestProps) => {
   );
 };
 
-const setupShallow = (success = false, secretWord = "party") => {
-  return shallow(<Input success={success} secretWord={secretWord} />);
-};
+// const setup = (success = false, secretWord = "party") => {
+//   return shallow(<Input success={success} secretWord={secretWord} />);
+// };
 
 describe("render", () => {
   describe("success is true", () => {
@@ -99,6 +99,7 @@ describe("render", () => {
 
 describe("state controlled input field", () => {
   const mockSetCurrentGuess = jest.fn();
+
   let wrapper: ReactWrapper;
 
   // [Important]
@@ -118,11 +119,8 @@ describe("state controlled input field", () => {
     // set useState to originalUseState.
     originalUseState = React.useState;
 
-    // mocking for shallow
-    // React.useState = jest.fn(() => ["", mockSetCurrentGuess]);
-
-    // mocking for mount
-    React.useState = () => ["", mockSetCurrentGuess];
+    // mocking
+    React.useState = jest.fn(() => ["", mockSetCurrentGuess]);
     wrapper = setup({});
   });
 
@@ -139,10 +137,11 @@ describe("state controlled input field", () => {
 
     // const wrapper = setup();
     const inputBox = findByTestAttr(wrapper, "input-box");
-    const mockEvent = { target: { value: "train" } };
 
+    const mockEvent = { target: { value: "train" } };
     // event simulate
     inputBox.simulate("change", mockEvent);
+
     expect(mockSetCurrentGuess).toHaveBeenCalledWith("train");
   });
 
@@ -164,6 +163,7 @@ describe("state controlled input field", () => {
     // [IMPORTANT]
     // we can manually enter target.value or some event attribute like preventDefault into the second param~~
     submit.simulate("click", { preventDefault() {} });
+
     expect(mockSetCurrentGuess).toBeCalled();
   });
 });

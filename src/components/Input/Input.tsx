@@ -43,6 +43,7 @@ const Input: React.FC<InputProps> = ({ success, secretWord }) => {
           )}
           value={currentGuess}
           // Destructuring case
+          // value={currentGuess_des}
           onChange={(event) => {
             setCurrentGuess(event.target.value);
             // Destructuring case
