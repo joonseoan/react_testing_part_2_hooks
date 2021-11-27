@@ -1,4 +1,11 @@
-import React, { FormEvent, useContext, useState } from "react";
+// [No destructuring test]
+// Must not use "React" when we are using NO destructuring test.
+// import React, { FormEvent, useContext, useState } from "react"; -----> React.useState()
+// Or otherwise, need to specify React.useState() when we are requiring to specify "React" in import.
+import { FormEvent, useContext, useState } from "react"; // -------> useState()
+
+// With Destructuring
+// import React, { FormEvent, useContext, useState } from "react";
 import PropTypes from "prop-types";
 import stringsModule from "../../helpers/strings";
 import languageContext from "../context/languageContext";
@@ -14,16 +21,8 @@ const Input: React.FC<InputProps> = ({ success, secretWord }) => {
   const language = useContext<string>(languageContext);
   const [currentGuess, setCurrentGuess] = useState("");
 
-  // Must use React.useState without destructuring.
-  // const [inputParams, setInputParameter] = React.useState<{
-  //   currentGuess: string;
-  //   language: string;
-  //   secretWord: string;
-  // }>({ currentGuess: "", language, secretWord: "" });
-
-  // if (success) {
-  //   return <div data-test="component-input" />;
-  // }
+  // [Really important]
+  // Must use React.useState without destructuring. Or, otherwise remove "React" like above.
 
   const handleOnSubmit = (event: FormEvent) => {
     event.preventDefault();
@@ -43,7 +42,6 @@ const Input: React.FC<InputProps> = ({ success, secretWord }) => {
           )}
           value={currentGuess}
           // Destructuring case
-          // value={currentGuess_des}
           onChange={(event) => {
             setCurrentGuess(event.target.value);
             // Destructuring case
@@ -68,5 +66,3 @@ Input.propTypes = {
 };
 
 export default Input;
-
-// need to do test next week.

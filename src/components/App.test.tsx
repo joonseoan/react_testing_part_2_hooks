@@ -40,7 +40,8 @@ describe.each([
   // %s: take the first argument ans use it as string!!
   "renders with secretWord as %s",
   (secretWord: string | null, loadingShows: boolean, appShows: boolean) => {
-    let wrapper = setup();
+    let wrapper: ReactWrapper;
+
     let originalReducer: <R extends Reducer<any, any>, I>(
       reducer: R,
       initializerArg: I
@@ -50,7 +51,8 @@ describe.each([
       originalReducer = React.useReducer;
 
       const mockUseReducer = jest.fn().mockReturnValue([
-        { secretWord }, // state
+        // Please make sure all
+        { secretWord, language: "en" }, // state
         jest.fn(), // dispatch
       ]);
 
