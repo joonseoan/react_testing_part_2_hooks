@@ -51,10 +51,7 @@ const reducer = (state: ReducerState = defaultState, action: Action) => {
 
 const App: FC = () => {
   // // reducer
-  const [state, dispatch] = useReducer(reducer, {
-    secretWord: null,
-    language: "en",
-  });
+  const [state, dispatch] = useReducer(reducer, defaultState);
 
   // 1) local state
   // const [secretWord, setSecretWord] = useState("");

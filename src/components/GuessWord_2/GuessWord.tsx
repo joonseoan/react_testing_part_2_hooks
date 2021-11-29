@@ -18,7 +18,7 @@ const GuessedWords: FC<GuessedWordsProps | any> = ({ guessedWords = [] }) => {
 
   if (!guessedWords.length) {
     contents = (
-      <span data-test="guess-instructions">Try to guess the correct word!</span>
+      <span data-test="guess-instructions">Try to guess the secret word!</span>
     );
   } else {
     const guessedWordsRows = guessedWords.map(

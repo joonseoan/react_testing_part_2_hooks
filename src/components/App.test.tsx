@@ -51,7 +51,8 @@ describe.each([
       originalReducer = React.useReducer;
 
       const mockUseReducer = jest.fn().mockReturnValue([
-        // Please make sure all
+        // [IMPORTANT] [IMPORTANT][IMPORTANT]!!!! Please make sure all props should pass
+        // Because we are using mount!.
         { secretWord, language: "en" }, // state
         jest.fn(), // dispatch
       ]);

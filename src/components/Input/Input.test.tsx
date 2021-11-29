@@ -13,9 +13,9 @@ interface InputTestProps {
 }
 
 const setup = ({ language, secretWord, success }: InputTestProps) => {
-  language = language || "en";
-  secretWord = secretWord || "party";
-  success = success || false;
+  language ||= "en";
+  secretWord ||= "party";
+  success ||= false;
 
   return mount(
     <languageContext.Provider value={language}>
@@ -167,6 +167,7 @@ describe("state controlled input field", () => {
   });
 });
 
+// Context Receiver testing
 describe("language picker", () => {
   test("correctly renders submit string in english", () => {
     const wrapper = setup({ language: "en" });
@@ -174,7 +175,7 @@ describe("language picker", () => {
     expect(submitButton.text()).toBe("Submit");
   });
 
-  test("correctly renders congrats string i emoji", () => {
+  test("correctly renders congrats string in emoji", () => {
     const wrapper = setup({ language: "emoji" });
     const submitButton = findByTestAttr(wrapper, "submit-button");
     expect(submitButton.text()).toBe("🚀");
