@@ -167,7 +167,7 @@ describe("state controlled input field", () => {
   });
 });
 
-// Context Receiver testing
+// Context Provider testing with mount
 describe("language picker", () => {
   test("correctly renders submit string in english", () => {
     const wrapper = setup({ language: "en" });

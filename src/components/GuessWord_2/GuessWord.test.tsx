@@ -1,5 +1,5 @@
 /** Add describe and beforeEach/After */
-
+import React from "react";
 import { shallow, ShallowWrapper } from "enzyme";
 import { findByTestAttr, checkProps } from "../../test/testUtil";
 import GuessedWords from "./GuessWord";
@@ -70,6 +70,7 @@ describe("if there are words guessed", () => {
   });
 });
 
+// Context Receiver Test without Provider by using mock
 describe("languagePicker", () => {
   test("correctly renders guess instructions string in English by default", () => {
     const wrapper = setup({ guessedWords: [] });
@@ -77,5 +78,17 @@ describe("languagePicker", () => {
     expect(guessInstructions.text()).toBe("Try to guess the secret word!");
   });
 
-  test("correctly renders guess instructions string in Emoji by default", () => {});
+  test("correctly renders guess instructions string in Emoji by default", () => {
+    // Mocking return value from jest.fn()
+    /**
+     * [Important]
+     * jest.fn().mockReturnValue(value) ===> to define any return value from a function.
+     */
+    const mockUseContext = jest.fn().mockReturnValue("emoji");
+    // if return value is `emoji` from the useContext
+    React.useContext = mockUseContext; // const returnValue = useContext(languageContext);
+    const wrapper = setup({ guessedWords: [] });
+    const guessInstructions = findByTestAttr(wrapper, "guess-instructions");
+    expect(guessInstructions.text()).toBe(`🤔🤫🔤`);
+  });
 });

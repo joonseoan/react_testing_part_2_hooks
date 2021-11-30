@@ -1,6 +1,7 @@
-import React, { FC, Key } from "react";
+import { FC, Key, useContext } from "react";
 import PropTypes from "prop-types";
-
+import languageContext from "../context/languageContext";
+import stringModule from "../../helpers/strings";
 interface GuessedWord {
   guessedWord: string;
   letterMatchCount: number;
@@ -14,11 +15,15 @@ interface GuessedWordsProps {
 
 // any: just for testing. (In reality, typescript should not use propTypes.)
 const GuessedWords: FC<GuessedWordsProps | any> = ({ guessedWords = [] }) => {
+  const language = useContext(languageContext);
+
   let contents: JSX.Element;
 
   if (!guessedWords.length) {
     contents = (
-      <span data-test="guess-instructions">Try to guess the secret word!</span>
+      <span data-test="guess-instructions">
+        {stringModule.getStringByLanguage(language, "guessPrompt")}
+      </span>
     );
   } else {
     const guessedWordsRows = guessedWords.map(
@@ -34,12 +39,22 @@ const GuessedWords: FC<GuessedWordsProps | any> = ({ guessedWords = [] }) => {
 
     contents = (
       <div data-test="guessed-words">
-        <h3>Guessed Words</h3>
+        <h3>{stringModule.getStringByLanguage(language, "guessedWords")}</h3>
         <table className="table table-sm">
           <thead className="thead-light">
             <tr>
-              <th>Guess</th>
-              <th>Matching Letters</th>
+              <th>
+                {stringModule.getStringByLanguage(
+                  language,
+                  "guessColumnHeader"
+                )}
+              </th>
+              <th>
+                {stringModule.getStringByLanguage(
+                  language,
+                  "matchingLettersColumnHeader"
+                )}
+              </th>
             </tr>
           </thead>
           <tbody>{guessedWordsRows}</tbody>
