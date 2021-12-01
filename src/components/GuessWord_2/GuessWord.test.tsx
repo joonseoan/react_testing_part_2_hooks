@@ -70,6 +70,7 @@ describe("if there are words guessed", () => {
   });
 });
 
+// [ Context ]
 // Context Receiver Test without Provider by using mock
 describe("languagePicker", () => {
   test("correctly renders guess instructions string in English by default", () => {

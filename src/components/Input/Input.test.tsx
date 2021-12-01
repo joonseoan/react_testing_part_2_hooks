@@ -6,6 +6,7 @@ import { shallow, mount, ShallowWrapper, ReactWrapper } from "enzyme";
 import languageContext from "../context/languageContext";
 import { findByTestAttr, checkProps } from "../../test/testUtil";
 import Input from "./Input";
+
 interface InputTestProps {
   language?: string;
   secretWord?: string;
@@ -56,6 +57,7 @@ describe("render", () => {
 
   describe("success is false", () => {
     let wrapper: ReactWrapper;
+
     beforeEach(() => {
       // when success is false
       wrapper = setup({ success: false });
@@ -80,6 +82,7 @@ describe("render", () => {
   });
 });
 
+// [useState with mock]
 // Mock entire module
 // Mock for for both shallow and mount (Destructuring)
 // It must be a global variable which means it should be outside of describe method.
@@ -167,6 +170,7 @@ describe("state controlled input field", () => {
   });
 });
 
+// [Context]
 // Context Provider testing with mount
 describe("language picker", () => {
   test("correctly renders submit string in english", () => {
