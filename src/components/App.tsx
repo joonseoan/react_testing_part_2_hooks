@@ -92,7 +92,8 @@ const App: FC = () => {
       <h1>Jotto</h1>
       <languageContext.Provider value={state.language}>
         <LanguagePicker setLanguage={setLanguage} />
-        <Congrats success={success} />{" "}
+        <Congrats />{" "}
+        {/* <Congrats success={success} />{" "}   <===== before the Embedded Context */}
         <Input success={success} secretWord={state.secretWord} />
         <GuessedWords guessedWords={guessedWords} />
       </languageContext.Provider>
