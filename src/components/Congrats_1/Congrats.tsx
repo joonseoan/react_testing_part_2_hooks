@@ -30,15 +30,9 @@ const Congrats: FC = () => {
   }
 };
 
-// Congrats.propTypes = {
-//   // [Important!!!]
-//   // 'isRequired' should be here if it wants to get warning!
-//   success: PropTypes.bool.isRequired,
-// };
-
 export default Congrats;
 
-// ----------------------------------------------------- [Before Embedded Context] ------------------------------------------
+// ----------------------------------------------------- [Before Embedded Context, use props] ------------------------------------------
 // import { FC } from "react";
 // import PropTypes from "prop-types";
 // import { useContext } from "react";

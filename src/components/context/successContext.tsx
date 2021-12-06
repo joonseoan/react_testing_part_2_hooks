@@ -32,13 +32,18 @@ function useSuccess() {
   return context;
 }
 
+interface SuccessProviderProps {
+  children: (string | Element)[];
+  value: [boolean, () => void];
+}
+
 /**
  * Implement useSuccess
  * @function SuccessProvider
  * @param {object} props - props to pass through from declared component.
  * @returns {JSX.Element} Provider Component.
  */
-function SuccessProvider(props: object) {
+function SuccessProvider(props: SuccessProviderProps | (any & object)) {
   // The return value will goes to "context" above.
   const [success, setSuccess] = useState<boolean>(false);
 

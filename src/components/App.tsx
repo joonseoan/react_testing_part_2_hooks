@@ -7,6 +7,7 @@ import LanguagePicker from "./LanguagePicker_4/LanguagePicker";
 
 import languageContext from "./context/languageContext";
 import { getSecretWord } from "../actions";
+import successContext from "./context/successContext";
 
 // interface AppProps {
 //   success?: boolean;
@@ -92,9 +93,12 @@ const App: FC = () => {
       <h1>Jotto</h1>
       <languageContext.Provider value={state.language}>
         <LanguagePicker setLanguage={setLanguage} />
-        <Congrats />{" "}
-        {/* <Congrats success={success} />{" "}   <===== before the Embedded Context */}
-        <Input success={success} secretWord={state.secretWord} />
+        <successContext.SuccessProvider>
+          <Congrats /> <Input secretWord={state.secretWord} />
+        </successContext.SuccessProvider>
+        .{/* Before Embedded Context */}
+        {/* <Congrats success={success} />{" "}
+        <Input success={success} secretWord={state.secretWord} /> */}
         <GuessedWords guessedWords={guessedWords} />
       </languageContext.Provider>
     </div>

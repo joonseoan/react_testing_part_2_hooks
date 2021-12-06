@@ -13,13 +13,15 @@ import checkPropTypes from "check-prop-types";
 import { findByTestAttr, checkProps } from "../../test/testUtil";
 import Congrats from "./Congrats";
 import languageContext from "../context/languageContext";
+import successContext from "../context/successContext";
 
 // since centralized config
 // Enzyme.configure({ adapter: new EnzymeAdapter() });
 
-const defaultProps = {
-  success: false,
-};
+// since embedded context
+// const defaultProps = {
+//   success: false,
+// };
 
 // setup props as empty object by default.
 /**
@@ -28,6 +30,24 @@ const defaultProps = {
  * @returns {ShallowWrapper}
  */
 // 2) With Context
+// const setup = ({
+//   success,
+//   language,
+// }: {
+//   success?: boolean;
+//   language?: string;
+// }) => {
+//   language ||= "en";
+//   success = success === undefined ? false : success;
+
+//   return mount(
+//     <languageContext.Provider value={language}>
+//       <Congrats success={success} />
+//     </languageContext.Provider>
+//   );
+// };
+
+// 3) With Custom-embedded context
 const setup = ({
   success,
   language,
@@ -40,7 +60,10 @@ const setup = ({
 
   return mount(
     <languageContext.Provider value={language}>
-      <Congrats success={success} />
+      {/* overriding the existing props's "value" properties */}
+      <successContext.SuccessProvider value={[success, jest.fn()]}>
+        <Congrats />‘
+      </successContext.SuccessProvider>
     </languageContext.Provider>
   );
 };
@@ -68,27 +91,27 @@ test("renders without error", () => {
   expect(component.length).toBe(1);
 });
 
-test("renders no text when `success` props is false", () => {
+test("renders no text when `success` is false", () => {
   const wrapper = setup({ success: false });
   const component = findByTestAttr(wrapper, "component-congrats");
   expect(component.text()).toBe("");
 });
 
-test("renders non-empty congrats message when `success` prop os true", () => {
+test("renders non-empty congrats message when `success` is true", () => {
   const wrapper = setup({ success: true });
   const message = findByTestAttr(wrapper, "congrats-message");
   expect(message.text().length).not.toBe(0);
 });
 
-test("it does not throw warning with expected props", () => {
-  const expectedProps = { success: false };
+// test("it does not throw warning with expected props", () => {
+//   const expectedProps = { success: false };
 
-  checkProps(Congrats, expectedProps);
+//   checkProps(Congrats, expectedProps);
 
-  // IMPORTANT: Props testing!!! (It is not required when we are using typescript)
+//   // IMPORTANT: Props testing!!! (It is not required when we are using typescript)
 
-  // because in Congrats Component, PropTypes are not defined yet ()
-  // const propError = checkPropTypes(Congrats.propTypes, expectedProps, 'prop', Congrats.name);
-  // console.log('propError: ', propError); // ---> undefined.
-  // expect(propError).toBeUndefined();
-});
+//   // because in Congrats Component, PropTypes are not defined yet ()
+//   // const propError = checkPropTypes(Congrats.propTypes, expectedProps, 'prop', Congrats.name);
+//   // console.log('propError: ', propError); // ---> undefined.
+//   // expect(propError).toBeUndefined();
+// });
