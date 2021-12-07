@@ -32,9 +32,10 @@ function useSuccess() {
   return context;
 }
 
+// { children: (string | Element)[]; value: [boolean, Mock<any, any>]; }
 interface SuccessProviderProps {
   children: (string | Element)[];
-  value: [boolean, () => void];
+  value: [boolean, jest.Mock];
 }
 
 /**
@@ -43,13 +44,15 @@ interface SuccessProviderProps {
  * @param {object} props - props to pass through from declared component.
  * @returns {JSX.Element} Provider Component.
  */
-function SuccessProvider(props: SuccessProviderProps | (any & object)) {
+function SuccessProvider(props: SuccessProviderProps | any) {
   // The return value will goes to "context" above.
   const [success, setSuccess] = useState<boolean>(false);
 
   // Only when success is changes, return success and setSuccess
   const value = useMemo(() => [success, setSuccess], [success]);
 
+  // value can be overriden by "props value" because props here
+  // {...{...value, ...props}}
   return <successContext.Provider value={value} {...props} />;
 }
 

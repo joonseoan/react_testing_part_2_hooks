@@ -3,6 +3,7 @@ import { FC } from "react";
 import { useContext } from "react";
 
 import languageContext from "../context/languageContext";
+import successContext from "../context/successContext";
 import strings from "../../helpers/strings";
 
 /**
@@ -11,8 +12,11 @@ import strings from "../../helpers/strings";
  * @returns {JSX.Element} - rendered component.
  */
 const Congrats: FC = () => {
-  const success = null;
+  // embedded context.
+  const [success] = successContext.useSuccess();
   const language = useContext<string>(languageContext);
+
+  console.log(strings.getStringByLanguage(language, "congrats"));
 
   if (success) {
     return (
@@ -20,8 +24,6 @@ const Congrats: FC = () => {
         <span data-test="congrats-message">
           {/* By implementing Context */}
           {strings.getStringByLanguage(language, "congrats")}
-
-          {/* Congratulations! You guessed the word! */}
         </span>
       </div>
     );

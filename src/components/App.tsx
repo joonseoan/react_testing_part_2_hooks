@@ -94,7 +94,8 @@ const App: FC = () => {
       <languageContext.Provider value={state.language}>
         <LanguagePicker setLanguage={setLanguage} />
         <successContext.SuccessProvider>
-          <Congrats /> <Input secretWord={state.secretWord} />
+          <Congrats />
+          <Input secretWord={state.secretWord} />
         </successContext.SuccessProvider>
         .{/* Before Embedded Context */}
         {/* <Congrats success={success} />{" "}

@@ -61,8 +61,8 @@ const Input: React.FC<InputProps> = ({ success, secretWord }) => {
 };
 
 Input.propTypes = {
-  secretWord: PropTypes.string.isRequired,
-  success: PropTypes.bool.isRequired,
+  secretWord: PropTypes.string,
+  success: PropTypes.bool,
 };
 
 export default Input;
