@@ -17,12 +17,10 @@ const Congrats: FC = () => {
   const language = useContext<string>(languageContext);
 
   console.log(strings.getStringByLanguage(language, "congrats"));
-
   if (success) {
     return (
       <div data-test="component-congrats" className="alert alert-success">
         <span data-test="congrats-message">
-          {/* By implementing Context */}
           {strings.getStringByLanguage(language, "congrats")}
         </span>
       </div>
