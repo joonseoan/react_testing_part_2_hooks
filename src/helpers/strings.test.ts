@@ -50,6 +50,6 @@ describe("language string testing", () => {
   });
 });
 
-test("testing the original warning is working after mock testing", () => {
-  console.warn("Warn!!!!!!!");
-});
+// test("testing the original warning is working after mock testing", () => {
+//   console.warn("Warn!!!!!!!");
+// });

@@ -63,7 +63,7 @@ const setup = ({
     <languageContext.Provider value={language}>
       {/* overriding the existing props's "value" properties */}
       <successContext.SuccessProvider value={[success, jest.fn()]}>
-        <Congrats />‘
+        <Congrats />
       </successContext.SuccessProvider>
     </languageContext.Provider>
   );

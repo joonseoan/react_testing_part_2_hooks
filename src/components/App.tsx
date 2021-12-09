@@ -100,7 +100,9 @@ const App: FC = () => {
         .{/* Before Embedded Context */}
         {/* <Congrats success={success} />{" "}
         <Input success={success} secretWord={state.secretWord} /> */}
-        <GuessedWords guessedWords={guessedWords} />
+        <GuessedWords
+        // guessedWords={guessedWords}
+        />
       </languageContext.Provider>
     </div>
   );

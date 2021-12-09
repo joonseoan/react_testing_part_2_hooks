@@ -16,7 +16,6 @@ const Congrats: FC = () => {
   const [success] = successContext.useSuccess();
   const language = useContext<string>(languageContext);
 
-  console.log(strings.getStringByLanguage(language, "congrats"));
   if (success) {
     return (
       <div data-test="component-congrats" className="alert alert-success">
