@@ -6,9 +6,7 @@ import { shallow, ShallowWrapper } from "enzyme";
 import { findByTestAttr, checkProps } from "../../test/testUtil";
 import GuessedWords from "./GuessWord";
 
-// const defaultProps = {
-//   guessedWords: [{ guessedWord: "train", letterMatchCount: 3 }],
-// };
+import guessWordsContext from "../context/guessWordsContext";
 
 /**
  * Factory function to create a ShallowWrapper for the GuessedWords component.
@@ -17,6 +15,12 @@ import GuessedWords from "./GuessWord";
  * @returns {ShallowWrapper}
  */
 const setup = (guessedWords = []) => {
+  // on the guessWordContext, the array will return [value, setter]
+  const mockUseGuessedWords = jest
+    .fn()
+    .mockReturnValue([guessedWords, jest.fn]);
+  guessWordsContext.useGuessWords = mockUseGuessedWords;
+
   return shallow(<GuessedWords />);
 };
 
@@ -91,6 +95,8 @@ describe("languagePicker", () => {
     expect(guessInstructions.text()).toBe(`🤔🤫🔤`);
   });
 });
+
+// ----------------------------------------------------------
 
 // With Context api with props
 

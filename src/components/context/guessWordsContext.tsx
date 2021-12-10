@@ -9,44 +9,36 @@ import {
   SetStateAction,
 } from "react";
 
-const guessWordsContext = createContext<
-  | (
-      | { guessedWord: string; letterMatchCount: number }[]
-      | Dispatch<
-          SetStateAction<{ guessedWord: string; letterMatchCount: number }[]>
-        >
-    )[]
-  | null
->(null);
+const guessWordsContext = createContext(null);
 
 /**
  * @function useGuessWords
- * @returns {Array} successContext value, which is a state of [value, setter].
+ * @returns {Array} guessWordContext value, which is a state of [value, setter].
  */
 function useGuessWords() {
   const context = useContext(guessWordsContext);
 
   if (!context) {
-    throw new Error("useSuccess must be used within a SuccessProvider.");
+    throw new Error("useGuessWords must be used within a SuccessProvider.");
   }
 
   return context;
 }
 
 /**
- * Implement useSuccess
+ * Implement useGuessWord
  * @function GuessWordsProvider
  * @param {object} props - props to pass through from declared component.
  * @returns {JSX.Element} Provider Component.
  */
 function GuessWordsProvider(props: object) {
   // The return value will goes to "context" above.
-  const [guessWords, setGuessWords] = useState<
+  const [guessedWords, setGuessedWords] = useState<
     { guessedWord: string; letterMatchCount: number }[]
   >([]);
 
   // Only when success is changes, return success and setSuccess
-  const value = useMemo(() => [guessWords, setGuessWords], [guessWords]);
+  const value = useMemo(() => [guessedWords, setGuessedWords], [guessedWords]);
 
   return <guessWordsContext.Provider value={value} {...props} />;
 }

@@ -5,9 +5,14 @@ import GuessedWords from "./GuessWord_2/GuessWord";
 import Congrats from "./Congrats_1/Congrats";
 import LanguagePicker from "./LanguagePicker_4/LanguagePicker";
 
+// context api
 import languageContext from "./context/languageContext";
-import { getSecretWord } from "../actions";
+
+// embedded context
 import successContext from "./context/successContext";
+import guessWordsContext from "./context/guessWordsContext";
+
+import { getSecretWord } from "../actions";
 
 // interface AppProps {
 //   success?: boolean;
@@ -100,9 +105,12 @@ const App: FC = () => {
         .{/* Before Embedded Context */}
         {/* <Congrats success={success} />{" "}
         <Input success={success} secretWord={state.secretWord} /> */}
-        <GuessedWords
-        // guessedWords={guessedWords}
-        />
+        <guessWordsContext.GuessWordsProvider>
+          <GuessedWords />
+        </guessWordsContext.GuessWordsProvider>
+        {/* <GuessedWords
+          guessedWords={guessedWords}
+        /> */}
       </languageContext.Provider>
     </div>
   );

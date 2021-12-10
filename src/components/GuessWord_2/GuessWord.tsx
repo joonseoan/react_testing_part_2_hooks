@@ -2,23 +2,20 @@
 import { FC, Key, useContext } from "react";
 
 import languageContext from "../context/languageContext";
+import guessWordsContext from "../context/guessWordsContext";
 import stringModule from "../../helpers/strings";
 
 interface GuessedWord {
-  guessedWord?: string;
-  letterMatchCount?: number;
-}
-
-interface GuessedWordsProps {
-  guessedWords?: GuessedWord[];
-  // success: boolean;
-  // secretWord: string;
+  guessedWord: string;
+  letterMatchCount: number;
 }
 
 // any: just for testing. (In reality, typescript should not use propTypes.)
 const GuessedWords: FC = () => {
-  const guessedWords: { [key: string]: string | number }[] = [];
+  const [guessedWords] = guessWordsContext.useGuessWords();
   const language = useContext(languageContext);
+
+  console.log("guessedWord =========> ", guessedWords);
 
   let contents: JSX.Element;
 
