@@ -14,8 +14,7 @@ interface GuessedWord {
 const GuessedWords: FC = () => {
   const [guessedWords] = guessWordsContext.useGuessWords();
   const language = useContext(languageContext);
-
-  console.log("guessedWord =========> ", guessedWords);
+  console.log("guessedWords: ", guessedWords);
 
   let contents: JSX.Element;
 
@@ -26,16 +25,20 @@ const GuessedWords: FC = () => {
       </span>
     );
   } else {
-    const guessedWordsRows = guessedWords.map(
-      (word: GuessedWord, index: Key) => {
+    let guessedWordsRows: JSX.Element[] | null;
+
+    if (Array.isArray(guessedWords)) {
+      guessedWordsRows = guessedWords.map((word: GuessedWord, index: Key) => {
         return (
           <tr data-test="guessed-word" key={index}>
             <td>{word.guessedWord}</td>
             <td>{word.letterMatchCount}</td>
           </tr>
         );
-      }
-    );
+      });
+    } else {
+      guessedWordsRows = null;
+    }
 
     contents = (
       <div data-test="guessed-words">
@@ -57,7 +60,7 @@ const GuessedWords: FC = () => {
               </th>
             </tr>
           </thead>
-          <tbody>{guessedWordsRows}</tbody>
+          {guessedWordsRows}
         </table>
       </div>
     );
