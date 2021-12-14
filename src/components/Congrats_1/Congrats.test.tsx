@@ -30,7 +30,7 @@ import successContext from "../context/successContext";
  * @returns {ShallowWrapper}
  */
 
-// 2) With Context
+// 2) With Context API
 // const setup = ({
 //   success,
 //   language,
@@ -48,7 +48,10 @@ import successContext from "../context/successContext";
 //   );
 // };
 
-// 3) With Custom-embedded context
+// [ Embedded Context - wrap component in Provider in setup set value with value prop]
+// pros 1) closer to actual app
+// 2) extra functionality (Provider) unlikely fail
+// cons 1) need to use mount - tests depend on children of component under test.
 const setup = ({
   success,
   language,

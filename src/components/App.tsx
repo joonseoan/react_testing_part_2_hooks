@@ -98,14 +98,14 @@ const App: FC = () => {
       <h1>Jotto</h1>
       <languageContext.Provider value={state.language}>
         <LanguagePicker setLanguage={setLanguage} />
-        <successContext.SuccessProvider>
-          <Congrats />
-          <Input secretWord={state.secretWord} />
-        </successContext.SuccessProvider>
-        .{/* Before Embedded Context */}
-        {/* <Congrats success={success} />{" "}
-        <Input success={success} secretWord={state.secretWord} /> */}
         <guessWordsContext.GuessWordsProvider>
+          <successContext.SuccessProvider>
+            <Congrats />
+            <Input secretWord={state.secretWord} />
+          </successContext.SuccessProvider>
+          .{/* Before Embedded Context */}
+          {/* <Congrats success={success} />{" "}
+        <Input success={success} secretWord={state.secretWord} /> */}
           <GuessedWords />
         </guessWordsContext.GuessWordsProvider>
         {/* <GuessedWords
