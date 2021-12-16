@@ -14,7 +14,7 @@ interface GuessedWord {
 const GuessedWords: FC = () => {
   const [guessedWords] = guessWordsContext.useGuessWords();
   const language = useContext(languageContext);
-  console.log("guessedWords: ", guessedWords);
+  // console.log("guessedWords: ", guessedWords);
 
   let contents: JSX.Element;
 

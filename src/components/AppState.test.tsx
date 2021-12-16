@@ -3,7 +3,6 @@
 /** Add describe and beforeEach/After */
 import React from "react";
 import { mount, ReactWrapper } from "enzyme";
-import App from "./App";
 import { findByTestAttr } from "../test/testUtil";
 
 import GuessedWords from "./GuessWord_2/GuessWord";
@@ -40,16 +39,19 @@ const setup = ({ secretWord, guessedWords }: DefaultState) => {
     </guessWordsContext.GuessWordsProvider>
   );
 
-  // add value to input box
+  // add value to input box in mount
   const inputBox = findByTestAttr(wrapper, "input-box");
   inputBox.simulate("change", { target: { value: "train " } });
 
-  // simulate click on submit button
+  // simulate click on submit button in mount
   const submitButton = findByTestAttr(wrapper, "submit-button");
   submitButton.simulate("click", { preventDefault() {} });
 
-  guessedWords!.map(({ guessedWord }: GuessedWord) => {
+  // testing event with context in mount!!!
+  guessedWords!.forEach(({ guessedWord }: GuessedWord) => {
     const mockEvent = { target: { value: guessedWord } };
+    inputBox.simulate("change", mockEvent);
+    submitButton.simulate("click", { preventDefault() {} });
   });
 
   return wrapper;
@@ -62,7 +64,7 @@ describe.skip("no words guessed", () => {
     wrapper = setup({
       secretWord: "party",
       success: false,
-      guessedWords: [],
+      guessedWords: [{ guessedWord: "agile", letterMatchCount: 1 }],
     });
   });
 

@@ -22,6 +22,7 @@ import guessWordsContext from "../context/guessWordsContext";
  * @returns {ShallowWrapper}
  */
 const setup = (guessedWords = []) => {
+  // Value and SetterMock [Important!!]
   // on the guessWordContext, the array will return [value, setter]
   const mockUseGuessedWords = jest
     .fn()

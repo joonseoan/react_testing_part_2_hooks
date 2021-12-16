@@ -9,6 +9,7 @@ import { FormEvent, useContext, useState } from "react"; // -------> useState()
 import PropTypes from "prop-types";
 import stringsModule from "../../helpers/strings";
 import languageContext from "../context/languageContext";
+import successContext from "../context/successContext";
 
 // ?: for now testing with propType.
 export interface InputProps {
@@ -17,12 +18,24 @@ export interface InputProps {
 }
 
 // React.FC (no destruction) : for now to test
-const Input: React.FC<InputProps> = ({ success, secretWord }) => {
+const Input: React.FC<InputProps> = ({
+  success: notUsedInEmbeddedContext,
+  secretWord: notUsedInEmbeddedContext_2,
+}) => {
   const language = useContext<string>(languageContext);
+  const [success, setSuccess] = successContext.useSuccess();
+
+  // -----------------------------
   const [currentGuess, setCurrentGuess] = useState("");
 
   // [Really important]
   // Must use React.useState without destructuring. Or, otherwise remove "React" like above.
+
+  // ------------------------------
+
+  if (!success) {
+    return <div data-test="component-input" />;
+  }
 
   const handleOnSubmit = (event: FormEvent) => {
     event.preventDefault();
