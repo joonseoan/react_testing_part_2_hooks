@@ -93,7 +93,7 @@ describe.skip("some words guessed", () => {
   });
 });
 
-describe.skip("guess secret word", () => {
+describe("guess secret word", () => {
   let wrapper: ReactWrapper;
 
   beforeEach(() => {
@@ -111,7 +111,7 @@ describe.skip("guess secret word", () => {
     submitButton.simulate("click", { preventDefault() {} });
   });
 
-  test("add row to guessedWords table", () => {
+  test.skip("add row to guessedWords table", () => {
     const guessedWordNodes = findByTestAttr(wrapper, "guessed-word");
     expect(guessedWordNodes).toHaveLength(3);
   });

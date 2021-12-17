@@ -2,7 +2,13 @@
 // Must not use "React" when we are using NO destructuring test.
 // import React, { FormEvent, useContext, useState } from "react"; -----> React.useState()
 // Or otherwise, need to specify React.useState() when we are requiring to specify "React" in import.
-import { FormEvent, useContext, useState } from "react"; // -------> useState()
+import {
+  FormEvent,
+  useContext,
+  useState,
+  Dispatch,
+  SetStateAction,
+} from "react"; // -------> useState()
 
 // With Destructuring
 // import React, { FormEvent, useContext, useState } from "react";
@@ -20,7 +26,7 @@ export interface InputProps {
 // React.FC (no destruction) : for now to test
 const Input: React.FC<InputProps> = ({
   success: notUsedInEmbeddedContext,
-  secretWord: notUsedInEmbeddedContext_2,
+  secretWord,
 }) => {
   const language = useContext<string>(languageContext);
   const [success, setSuccess] = successContext.useSuccess();
@@ -39,6 +45,12 @@ const Input: React.FC<InputProps> = ({
 
   const handleOnSubmit = (event: FormEvent) => {
     event.preventDefault();
+
+    // Fix this one weekends
+    // if (currentGuess === secretWord) {
+    //   setSuccess(true);
+    // }
+
     setCurrentGuess("");
   };
 
