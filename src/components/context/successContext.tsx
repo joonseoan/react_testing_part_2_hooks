@@ -49,11 +49,11 @@ function SuccessProvider(props: SuccessProviderProps | any) {
   const [success, setSuccess] = useState<boolean>(false);
 
   // Only when success is changes, return success and setSuccess
-  // const value = useMemo(() => [success, setSuccess], [success]);
+  const value = useMemo(() => [success, setSuccess], [success]);
 
   // value can be overriden by "props value" because props here
   // {...{...value, ...props}}
-  return <successContext.Provider value={[success, setSuccess]} {...props} />;
+  return <successContext.Provider value={value} {...props} />;
 }
 
 export default { SuccessProvider, useSuccess };

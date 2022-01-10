@@ -111,7 +111,7 @@ describe("guess secret word", () => {
     submitButton.simulate("click", { preventDefault() {} });
   });
 
-  test.skip("add row to guessedWords table", () => {
+  test.skip("adds row to guessedWords table", () => {
     const guessedWordNodes = findByTestAttr(wrapper, "guessed-word");
     expect(guessedWordNodes).toHaveLength(3);
   });

@@ -34,6 +34,8 @@ const Input: React.FC<InputProps> = ({
   // -----------------------------
   const [currentGuess, setCurrentGuess] = useState("");
 
+  console.log("successContext.useSuccess(): ", successContext.useSuccess());
+
   // [Really important]
   // Must use React.useState without destructuring. Or, otherwise remove "React" like above.
 
@@ -47,11 +49,11 @@ const Input: React.FC<InputProps> = ({
     event.preventDefault();
 
     // Fix this one weekends
-    // if (currentGuess === secretWord) {
-    //   setSuccess(true);
-    // }
+    if (currentGuess === secretWord) {
+      setSuccess();
+    }
 
-    setCurrentGuess("");
+    // setCurrentGuess("");
   };
 
   return (
