@@ -10,12 +10,13 @@ import {
 } from "react";
 
 const guessWordsContext = createContext<
-  | (
-      | { guessedWord: string; letterMatchCount: number }[]
-      | Dispatch<
-          SetStateAction<{ guessedWord: string; letterMatchCount: number }[]>
-        >
-    )[]
+({
+  guessedWord: string;
+  letterMatchCount: number;
+}[] | Dispatch<SetStateAction<{
+  guessedWord: string;
+  letterMatchCount: number;
+}[]>>)[]
   | null
 >(null);
 

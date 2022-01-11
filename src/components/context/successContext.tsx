@@ -9,9 +9,12 @@ import {
   SetStateAction,
 } from "react";
 
-const successContext = createContext<
-  (boolean | Dispatch<SetStateAction<boolean>>)[] | null
->(null);
+// const successContext = createContext<
+//   (boolean | Dispatch<SetStateAction<boolean>>)[] | null
+// >(null);
+
+const successContext = createContext<(boolean | Dispatch<SetStateAction<boolean>>)[] | null>(null);
+
 
 /**
  * @function useSuccess
@@ -51,7 +54,7 @@ function SuccessProvider(props: SuccessProviderProps | any) {
   // Only when success is changes, return success and setSuccess
   const value = useMemo(() => [success, setSuccess], [success]);
 
-  // value can be overriden by "props value" because props here
+  // value can be overiden by "props value" because props here
   // {...{...value, ...props}}
   return <successContext.Provider value={value} {...props} />;
 }

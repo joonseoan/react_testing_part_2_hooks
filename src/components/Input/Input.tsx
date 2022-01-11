@@ -29,7 +29,7 @@ const Input: React.FC<InputProps> = ({
   secretWord,
 }) => {
   const language = useContext<string>(languageContext);
-  const [success, setSuccess] = successContext.useSuccess();
+  const [success, setSuccess]= successContext.useSuccess();
 
   // -----------------------------
   const [currentGuess, setCurrentGuess] = useState("");
@@ -52,8 +52,6 @@ const Input: React.FC<InputProps> = ({
     if (currentGuess === secretWord) {
       setSuccess();
     }
-
-    // setCurrentGuess("");
   };
 
   return (
