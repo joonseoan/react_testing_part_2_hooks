@@ -50,13 +50,13 @@ const Input: React.FC<InputProps> = ({
 
     // Fix this one weekends
     if (currentGuess === secretWord) {
-      setSuccess();
+      setSuccess(true);
     }
   };
 
   return (
     <div data-test="component-input">
-      <form className="form-inline">
+      <form className="form-inline" onSubmit={handleOnSubmit}>
         <input
           data-test="input-box"
           className="mb-2 mx-sm-3"
@@ -75,7 +75,8 @@ const Input: React.FC<InputProps> = ({
         />
         <button
           data-test="submit-button"
-          onClick={handleOnSubmit}
+          type="submit"
+          // onClick={handleOnSubmit}
           className="btn btn-primary mb-2"
         >
           {stringsModule.getStringByLanguage(language, "submit")}

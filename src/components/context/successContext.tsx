@@ -9,12 +9,14 @@ import {
   SetStateAction,
 } from "react";
 
+// not working.
 // const successContext = createContext<
 //   (boolean | Dispatch<SetStateAction<boolean>>)[] | null
 // >(null);
 
-const successContext = createContext<(boolean | Dispatch<SetStateAction<boolean>>)[] | null>(null);
-
+// In the array, we need to specify the type, not return value of useMemo.
+// Then we can deconstruct.
+const successContext = createContext<[boolean, Dispatch<SetStateAction<boolean>>] | null>(null);
 
 /**
  * @function useSuccess
