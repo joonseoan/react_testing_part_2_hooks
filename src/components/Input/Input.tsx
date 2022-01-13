@@ -25,21 +25,15 @@ export interface InputProps {
 
 // React.FC (no destruction) : for now to test
 const Input: React.FC<InputProps> = ({
-  success: notUsedInEmbeddedContext,
+  // success: notUsedInEmbeddedContext,
   secretWord,
 }) => {
   const language = useContext<string>(languageContext);
   const [success, setSuccess]= successContext.useSuccess();
-
-  // -----------------------------
   const [currentGuess, setCurrentGuess] = useState("");
-
-  console.log("successContext.useSuccess(): ", successContext.useSuccess());
 
   // [Really important]
   // Must use React.useState without destructuring. Or, otherwise remove "React" like above.
-
-  // ------------------------------
 
   if (!success) {
     return <div data-test="component-input" />;
@@ -48,7 +42,6 @@ const Input: React.FC<InputProps> = ({
   const handleOnSubmit = (event: FormEvent) => {
     event.preventDefault();
 
-    // Fix this one weekends
     if (currentGuess === secretWord) {
       setSuccess(true);
     }
@@ -76,7 +69,6 @@ const Input: React.FC<InputProps> = ({
         <button
           data-test="submit-button"
           type="submit"
-          // onClick={handleOnSubmit}
           className="btn btn-primary mb-2"
         >
           {stringsModule.getStringByLanguage(language, "submit")}
