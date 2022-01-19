@@ -103,7 +103,7 @@ const App: FC = () => {
             <Congrats />
             <Input secretWord={state.secretWord} />
           </successContext.SuccessProvider>
-          .{/* Before Embedded Context */}
+          {/* Before Embedded Context */}
           {/* <Congrats success={success} />{" "}
         <Input success={success} secretWord={state.secretWord} /> */}
           <GuessedWords />
