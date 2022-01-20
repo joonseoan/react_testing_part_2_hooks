@@ -35,9 +35,6 @@ const Input: React.FC<InputProps> = ({
   // [Really important]
   // Must use React.useState without destructuring. Or, otherwise remove "React" like above.
 
-  console.log('success: ', success)
-
-
   if (success) {
     return <div data-test="component-input" />;
   }

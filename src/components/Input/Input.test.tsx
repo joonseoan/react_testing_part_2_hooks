@@ -64,12 +64,12 @@ describe("render", () => {
     test("input box does not show", () => {
       const inputBox = findByTestAttr(wrapper, "input-box");
       // "exist" from enzyme!!
-      expect(inputBox.exists()).toBe(true);
+      expect(inputBox.exists()).toBe(false);
     });
 
     test("submit button does not show", () => {
       const submitButton = findByTestAttr(wrapper, "submit-button");
-      expect(submitButton.exists()).toBe(true);
+      expect(submitButton.exists()).toBe(false);
     });
   });
 
@@ -90,12 +90,12 @@ describe("render", () => {
     test("input box shows", () => {
       const inputBox = findByTestAttr(wrapper, "input-box");
       // "exist" from enzyme!!
-      expect(inputBox.exists()).toBe(false);
+      expect(inputBox.exists()).toBe(true);
     });
 
     test("submit button shows", () => {
       const submitButton = findByTestAttr(wrapper, "submit-button");
-      expect(submitButton.exists()).toBe(false);
+      expect(submitButton.exists()).toBe(true);
     });
   });
 });
@@ -134,7 +134,7 @@ describe("state controlled input field", () => {
     // mocking for mount (No destructuring)
     React.useState = () => [true, mockSetCurrentGuess];
 
-    wrapper = setup({ success: true });
+    wrapper = setup({ success: false });
   });
 
   afterEach(() => {
@@ -187,13 +187,13 @@ describe("state controlled input field", () => {
 // Context Provider testing with mount
 describe("language picker", () => {
   test("correctly renders submit string in english", () => {
-    const wrapper = setup({ language: "en", success: true });
+    const wrapper = setup({ language: "en" });
     const submitButton = findByTestAttr(wrapper, "submit-button");
     expect(submitButton.text()).toBe("Submit");
   });
 
   test("correctly renders congrats string in emoji", () => {
-    const wrapper = setup({ language: "emoji", success: true });
+    const wrapper = setup({ language: "emoji" });
     const submitButton = findByTestAttr(wrapper, "submit-button");
     expect(submitButton.text()).toBe("🚀");
   });
