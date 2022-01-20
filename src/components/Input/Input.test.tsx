@@ -174,8 +174,8 @@ describe("state controlled input field", () => {
 
     // [IMPORTANT]
     // we can manually enter target.value or some event attribute like preventDefault into the second param~~
-    submit.simulate("click", { preventDefault() {} });
-    expect(mockSetCurrentGuess).not.toBeCalled();
+    submit.simulate("submit", { preventDefault() {} });
+    expect(mockSetCurrentGuess).toBeCalled();
 
     // Since we use context for setSuccess instead of the local state,
     // that local state is not be called.

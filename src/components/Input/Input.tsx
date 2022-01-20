@@ -45,6 +45,8 @@ const Input: React.FC<InputProps> = ({
     if (currentGuess === secretWord) {
       setSuccess(true);
     }
+
+    setCurrentGuess("");
   };
 
   return (

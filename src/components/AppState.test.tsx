@@ -28,7 +28,7 @@ interface DefaultState {
  * @param {Array} guessedWords guessedWords value specific to this setup.
  * @returns {ShallowWrapper}
  */
-const setup = ({ secretWord, guessedWords }: DefaultState) => {
+const setup = ({ secretWord, guessedWords, success }: DefaultState) => {
   const wrapper = mount(
     <guessWordsContext.GuessWordsProvider>
       <successContext.SuccessProvider>
@@ -45,13 +45,13 @@ const setup = ({ secretWord, guessedWords }: DefaultState) => {
   
     // simulate click on submit button in mount
     const submitButton = findByTestAttr(wrapper, "submit-button");
-    submitButton.simulate("click", { preventDefault() {} });
+    submitButton.simulate("submit", { preventDefault() {} });
   
     // testing event with context in mount!!!
     guessedWords!.forEach(({ guessedWord }: GuessedWord) => {
       const mockEvent = { target: { value: guessedWord } };
       inputBox.simulate("change", mockEvent);
-      submitButton.simulate("click", { preventDefault() {} });
+      submitButton.simulate("submit", { preventDefault() {} });
     });
 
   return wrapper;
@@ -99,7 +99,7 @@ describe("guess secret word", () => {
   beforeEach(() => {
     wrapper = setup({
       secretWord: "party",
-      // success: true,
+      success: false,
       // "a" matched in party and agile.
       guessedWords: [{ guessedWord: "agile", letterMatchCount: 1 }],
     });
@@ -108,7 +108,7 @@ describe("guess secret word", () => {
     inputBox.simulate("change", { target: { value: "party" } });
 
     const submitButton = findByTestAttr(wrapper, "submit-button");
-    submitButton.simulate("click", { preventDefault() {} });
+    submitButton.simulate("submit", { preventDefault() {} });
   });
 
   test.skip("adds row to guessedWords table", () => {
@@ -119,16 +119,16 @@ describe("guess secret word", () => {
   // because currently the success value is not defined in SuccessProvider
   test("displays congrats component", () => {
     const congrats = findByTestAttr(wrapper, "component-congrats");
-    expect(congrats.text().length).toBe(0);
+    expect(congrats.text().length).toBeGreaterThan(0);
   });
 
   // because currently the success value is not defined in SuccessProvider
   test("does not display input component contents", () => {
     const inputBox = findByTestAttr(wrapper, "input-box");
-    expect(inputBox.exists()).toBe(true);
+    expect(inputBox.exists()).toBe(false);
 
     const submitButton = findByTestAttr(wrapper, "submit-button");
-    expect(submitButton.exists()).toBe(true);
+    expect(submitButton.exists()).toBe(false);
   });
 });
 
