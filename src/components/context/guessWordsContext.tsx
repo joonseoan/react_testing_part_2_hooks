@@ -1,5 +1,6 @@
 // It is Context with Embedded state.
 
+import { type } from "os";
 import {
   useContext,
   createContext,
@@ -9,16 +10,26 @@ import {
   SetStateAction,
 } from "react";
 
-const guessWordsContext = createContext<
-({
+interface GuessedWord {
   guessedWord: string;
   letterMatchCount: number;
-}[] | Dispatch<SetStateAction<{
-  guessedWord: string;
-  letterMatchCount: number;
-}[]>>)[]
-  | null
->(null);
+}
+
+type GuessedWords = GuessedWord[];
+
+// const successContext = createContext<[boolean, Dispatch<SetStateAction<boolean>>] | null>(null);
+const guessWordsContext = createContext<[GuessedWords, Dispatch<SetStateAction<GuessedWords>>] | null>(null);
+
+// const guessWordsContext = createContext<
+// ({
+//   guessedWord: string;
+//   letterMatchCount: number;
+// }[] | Dispatch<SetStateAction<{
+//   guessedWord: string;
+//   letterMatchCount: number;
+// }[]>>)[]
+//   | null
+// >(null);
 
 /**
  * @function useGuessWords
@@ -42,14 +53,14 @@ function useGuessWords() {
  */
 function GuessWordsProvider(props: object) {
   // The return value will goes to "context" above.
-  const [guessedWords, setGuessedWords] = useState<
-    { guessedWord: string; letterMatchCount: number }[]
-  >([]);
+  const [guessedWords, setGuessedWords] = useState<GuessedWords>([]);
 
   // Only when success is changes, return success and setSuccess
-  const value = useMemo(() => [guessedWords, setGuessedWords], [guessedWords]);
+  // const value = useMemo(() => [guessedWords, setGuessedWords], [guessedWords]);
 
-  return <guessWordsContext.Provider value={value} {...props} />;
+  return <guessWordsContext.Provider 
+    value={[guessedWords, setGuessedWords]} {...props} 
+  />;
 }
 
 export default { GuessWordsProvider, useGuessWords };

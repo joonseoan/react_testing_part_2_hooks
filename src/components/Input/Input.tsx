@@ -16,6 +16,8 @@ import PropTypes from "prop-types";
 import stringsModule from "../../helpers/strings";
 import languageContext from "../context/languageContext";
 import successContext from "../context/successContext";
+import guessWordsContext from "../context/guessWordsContext";
+import { getLetterMatchCount } from "../../helpers";
 
 // ?: for now testing with propType.
 export interface InputProps {
@@ -30,6 +32,7 @@ const Input: React.FC<InputProps> = ({
 }) => {
   const language = useContext<string>(languageContext);
   const [success, setSuccess]= successContext.useSuccess();
+  const [guessedWords, setGuessedWords] = guessWordsContext.useGuessWords();
   const [currentGuess, setCurrentGuess] = useState("");
 
   // [Really important]
@@ -42,6 +45,11 @@ const Input: React.FC<InputProps> = ({
   const handleOnSubmit = (event: FormEvent) => {
     event.preventDefault();
 
+    // update guessedWords
+    const letterMatchCount = getLetterMatchCount(currentGuess, secretWord ?? '');
+    const newGuessedWords = [ ...guessedWords, { guessedWord: currentGuess, letterMatchCount }];
+    setGuessedWords(newGuessedWords);
+    
     if (currentGuess === secretWord) {
       setSuccess(true);
     }
