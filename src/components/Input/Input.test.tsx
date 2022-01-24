@@ -5,6 +5,7 @@ import { shallow, mount, ShallowWrapper, ReactWrapper } from "enzyme";
 
 import successContext from "../context/successContext";
 import languageContext from "../context/languageContext";
+import guessWordsContext from "../context/guessWordsContext";
 import { findByTestAttr, checkProps } from "../../test/testUtil";
 import Input from "./Input";
 
@@ -37,7 +38,9 @@ const setup = ({ language, secretWord, success }: InputTestProps) => {
           </languageContext.Provider>
       */}
       <successContext.SuccessProvider value={[success, jest.fn()]}>
-        <Input secretWord={secretWord} />
+        <guessWordsContext.GuessWordsProvider>
+          <Input secretWord={secretWord} />
+        </guessWordsContext.GuessWordsProvider>
       </successContext.SuccessProvider>
     </languageContext.Provider>
   );

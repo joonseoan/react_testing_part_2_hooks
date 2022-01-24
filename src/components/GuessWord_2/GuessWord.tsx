@@ -60,7 +60,9 @@ const GuessedWords: FC = () => {
               </th>
             </tr>
           </thead>
-          {guessedWordsRows}
+          <tbody>
+            {guessedWordsRows}
+          </tbody>
         </table>
       </div>
     );

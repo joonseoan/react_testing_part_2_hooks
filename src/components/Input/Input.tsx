@@ -46,9 +46,12 @@ const Input: React.FC<InputProps> = ({
     event.preventDefault();
 
     // update guessedWords
-    const letterMatchCount = getLetterMatchCount(currentGuess, secretWord ?? '');
-    const newGuessedWords = [ ...guessedWords, { guessedWord: currentGuess, letterMatchCount }];
-    setGuessedWords(newGuessedWords);
+    if (currentGuess && secretWord) {
+      const letterMatchCount = getLetterMatchCount(currentGuess, secretWord);
+      const newGuessedWords = [ ...guessedWords, { guessedWord: currentGuess, letterMatchCount }];
+  
+      setGuessedWords(newGuessedWords);
+    }
     
     if (currentGuess === secretWord) {
       setSuccess(true);
