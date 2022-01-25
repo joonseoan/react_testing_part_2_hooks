@@ -57,7 +57,7 @@ const setup = ({ secretWord, guessedWords, success }: DefaultState) => {
   return wrapper;
 };
 
-describe.skip("no words guessed", () => {
+describe("no words guessed", () => {
   let wrapper: ReactWrapper;
 
   beforeEach(() => {
@@ -70,7 +70,7 @@ describe.skip("no words guessed", () => {
 
   test("creates GuessedWords table with one row", () => {
     const guessedWordRow = findByTestAttr(wrapper, "guessed-word");
-    expect(guessedWordRow).toHaveLength(1);
+    expect(guessedWordRow).toHaveLength(2);
   });
 });
 

@@ -135,7 +135,7 @@ describe("state controlled input field", () => {
     originalUseState = React.useState;
 
     // mocking for mount (No destructuring)
-    React.useState = () => [true, mockSetCurrentGuess];
+    React.useState = () => ['', mockSetCurrentGuess];
 
     wrapper = setup({ success: false });
   });

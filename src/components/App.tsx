@@ -63,8 +63,8 @@ const App: FC = () => {
   // const [secretWord, setSecretWord] = useState("");
 
   // TODO: get props from sharing state.
-  const success = false;
-  const guessedWords: {}[] = [];
+  // const success = false;
+  // const guessedWords: {}[] = [];
 
   const setSecretWord = (secretWord: string) => {
     dispatch({ type: "setSecretWord", payload: secretWord });
@@ -98,6 +98,7 @@ const App: FC = () => {
       <h1>Jotto</h1>
       <languageContext.Provider value={state.language}>
         <LanguagePicker setLanguage={setLanguage} />
+        {/* <p>{state.secretWord}</p> */}
         <guessWordsContext.GuessWordsProvider>
           <successContext.SuccessProvider>
             <Congrats />
